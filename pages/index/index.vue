@@ -5,7 +5,7 @@
 			<text class="title">{{title}}</text>
 		</view>
 		<u-button text="按钮" type="primary"></u-button>
-		<text class="iconfont icon-tixing" />
+		<text class="iconfont icon-shouye-select" />
 	</view>
 </template>
 

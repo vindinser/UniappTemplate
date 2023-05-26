@@ -1,17 +1,62 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// {
+		// 	"path": "pages/login/login",
+		// 	"style": {
+		// 		"navigationBarTitleText": "登录"
+		// 	}
+		// }, 
 		{
-			"path": "pages/index/index",
+			"path": "pages/tabbar/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页"
+			}
+		}, {
+			"path": "pages/tabbar/cars/cars",
+			"style": {
+				"navigationBarTitleText": "全部车辆"
+			}
+		}, {
+			"path": "pages/tabbar/my/my",
+			"style": {
+				"navigationBarTitleText": "我的"
 			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTitleText": "LossAssessmentAPP",
+		"navigationBarBackgroundColor": "#ffffff",
+		"navigationStyle": "custom",
+		"app-plus": {
+			"bounce": "none"
+		}
 	},
-	"uniIdRouter": {}
+	"tabBar": {
+		"color": "#333333",
+		"selectedColor": "#1570EF",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		// "iconfontSrc":"/static/iconfont/iconfont.ttf", //图标路径
+		"list": [{
+			"pagePath": "pages/tabbar/index/index",
+			"iconPath": "static/image/tabbar/cars.png",
+			"selectedIconPath": "static/image/tabbar/index-select.png",
+			// "iconfont": {
+			// 	"fontSize": "22px",
+			// 	"text": "\ue722"
+			// },
+			"text": "首页"
+		}, {
+			"pagePath": "pages/tabbar/cars/cars",
+			"iconPath": "static/image/tabbar/cars.png",
+			"selectedIconPath": "static/image/tabbar/cars-select.png",
+			"text": "全部车辆"
+		}, {
+			"pagePath": "pages/tabbar/my/my",
+			"iconPath": "static/image/tabbar/my.png",
+			"selectedIconPath": "static/image/tabbar/my-select.png",
+			"text": "我的"
+		}]
+	}
 }

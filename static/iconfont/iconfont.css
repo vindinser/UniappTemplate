@@ -35,7 +35,7 @@
   content: "\e719";
 }
 
-.icon-shouye-zhong:before {
+.icon-shouye-select:before {
   content: "\e71a";
 }
 
@@ -43,7 +43,7 @@
   content: "\e71b";
 }
 
-.icon-quanbucheliang-wode:before {
+.icon-quanbucheliang-select:before {
   content: "\e71c";
 }
 
@@ -75,7 +75,7 @@
   content: "\e723";
 }
 
-.icon-wode-zhong:before {
+.icon-wode-select:before {
   content: "\e724";
 }
 
