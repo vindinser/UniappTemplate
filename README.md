@@ -26,7 +26,7 @@
 	│   └── utils                  // 公用方法
     ├── static                     // 公共文件
     │   ├── image                  // 图片
-	│	│   └── tabbar             // 导航栏图标
+    │   │   └── tabbar             // 导航栏图标
 	│   ├── iconfont               // iconfont图标
     │   ├── logo.png               // logo图片
     │   └── style                  // style样式
