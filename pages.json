@@ -6,6 +6,21 @@
 				"navigationBarTitleText": "登录"
 			}
 		}, {
+			"path": "pages/login/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/login/retrieve-password",
+			"style": {
+				"navigationBarTitleText": "找回密码"
+			}
+		}, {
+			"path": "pages/login/edit-password",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		}, {
 			"path": "pages/tabbar/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"

@@ -1,0 +1,28 @@
+// 登录、注册、找回密码共用 scss
+.login-head {
+	margin-top: 120rpx;
+	padding: 16px;
+	@include flex($direction: column);
+	@include custom-text($s: 24px, $w: 600, $H: 1.8);
+	
+	&_secondary-info {
+		@include custom-text($c: #909193, $s: 11px, $w: 400, $H: 13px);
+	}
+}
+
+.login-form {
+	padding: 16px;
+
+	.register-btn {
+		text-align: center;
+		line-height: 24px;
+		margin-top: 8px;
+	}
+}
+
+.accept-terms {
+	flex: 1;
+	@include custom-flex($align: flex-end, $justify: center);
+	line-height: 24px;
+	padding-bottom: 32px;
+}

@@ -1,12 +1,12 @@
-<!-- 登录页 -->
+<!-- 注册 -->
 <template>
 	<view class="u-sys login-box">
 		<!-- 顶部导航栏(如不写，需条件编译微信小程序样式) -->
 		<u-navbar :title="emptyString" :left-icon="emptyString" :auto-back="false" />
 		<!-- 登录头部 -->
 		<view class="login-head">
-			<text>欢迎使用华正拍卖平台</text>
-			<!-- <view class="">未注册过的手机号请先注册</view> -->
+			<text>注册华正拍卖平台</text>
+			<text class="login-head_secondary-info">未注册过的手机号码请先注册</text>
 		</view>
 		<!-- 登录表单 -->
 		<view class="login-form">
@@ -29,14 +29,32 @@
 					</u-input>
 					<!-- #endif -->
 				</u-form-item>
+				<u-form-item label="确认密码" prop="password">
+					<!-- #ifdef APP-PLUS -->
+					<u-input v-show="password" v-model="loginForm.password" password placeholder="确认密码">
+						<u-icon slot="suffix" name="eye" bold :size="18" @click="password = false" />
+					</u-input>
+					<u-input v-show="!password" v-model="loginForm.password" placeholder="确认密码">
+						<u-icon slot="suffix" name="eye-off" bold :size="18" @click="password = true" />
+					</u-input>
+					<!-- #endif -->
+					<!-- #ifndef APP-PLUS -->
+					<u-input v-model="loginForm.password" :password="password" placeholder="确认密码">
+						<u-icon slot="suffix" :name="password ? 'eye' : 'eye-off'" bold :size="18" @click="password = !password" />
+					</u-input>
+					<!-- #endif -->
+				</u-form-item>
+				<u-form-item label="验证码" prop="code">
+					<u-input v-model="loginForm.code" type="number" placeholder="输入验证码">
+						<template slot="suffix">
+							<u-code ref="uCode" @change="(text) => tips = text" seconds="60" changeText="X秒重新获取哈哈哈" />
+							<u-button @tap="getCode" :text="tips" type="primary" size="mini" />
+						</template>
+					</u-input>
+				</u-form-item>
 			</u-form>
 			<view class="u-m-t-80">
-				<u-button text="登录" type="primary" :loading="loading" @click="handleLogin" />
-			</view>
-			<view class="register-btn">
-				<text class="u-primary" @click="registerBtnClick('retrieve-password')">找回密码</text>
-				<text class="u-primary u-m-l-24 u-m-r-24">|</text>
-				<text class="u-primary" @click="registerBtnClick('register')">立即注册</text>
+				<u-button text="注册" type="primary" :loading="loading" @click="handleLogin" />
 			</view>
 		</view>
 		<view class="accept-terms">
@@ -53,17 +71,18 @@
 		data: () => ({
 			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
 			loginForm: {
-				username: 'admin',
-				password: 'admin123',
-				code: '',
-				uuid: ''
+				username: '',
+				password: '',
+				code: ''
 			}, // 登录表单
 			rules: {
 				username: [{ required: true, message: '请输入手机号码' } ],
-				password: [{ required: true, message: '请输入登录密码' } ]
+				password: [{ required: true, message: '请输入登录密码' } ],
+				code: [{ required: true, message: '请输入验证码' } ]
 			}, // 登录表单验证规则
 			password: true, // 密码输入框状态
-			loading: false // 登录按钮加载状态
+			loading: false, // 登录按钮加载状态
+			tips: ''
 		}),
 		methods: {
 			// 登录按钮点击事件
@@ -73,10 +92,23 @@
 					console.log('login')
 				})
 			},
-			// 找回密码/立即注册
-			registerBtnClick(operaType) {
-				console.log(operaType, this.$tab)
-				this.$tab.to(`/pages/login/${ operaType }`)
+			// 获取验证码
+			getCode() {
+				if (this.$refs.uCode.canGetCode) {
+					// 模拟向后端请求验证码
+					uni.showLoading({
+						title: '正在获取验证码'
+					})
+					setTimeout(() => {
+						uni.hideLoading();
+						// 这里此提示会被this.start()方法中的提示覆盖
+						uni.$u.toast('验证码已发送');
+						// 通知验证码组件内部开始倒计时
+						this.$refs.uCode.start();
+					}, 2000);
+				} else {
+					uni.$u.toast('倒计时结束后再发送');
+				}
 			},
 			// 协议点击事件
 			handleAgrement() {
