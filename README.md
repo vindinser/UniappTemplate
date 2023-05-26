@@ -25,8 +25,9 @@
     │       └── color              // 主体颜色配置
     │       └── tabbar             // 底部栏配置
     ├── static                     // 公共文件
-    │   ├── favicon.ico            // favicon图标
-    │   └── iconfont               // iconfont图标
+    │   ├── image                  // 图片
+	│	│   └── tabbar             // 导航栏图标
+	│   └── iconfont               // iconfont图标
     │   └── logo.png               // logo图片
     │   └── style                  // style样式
     ├── uni_modules                // uniui组件
