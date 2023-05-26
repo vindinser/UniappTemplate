@@ -1,0 +1,101 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('/static/iconfont/iconfont.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tixing:before {
+  content: "\e72a";
+}
+
+.icon-shezhi-wode:before {
+  content: "\e715";
+}
+
+.icon-gonggao:before {
+  content: "\e716";
+}
+
+.icon-kefurexian:before {
+  content: "\e717";
+}
+
+.icon-renzheng-wode:before {
+  content: "\e718";
+}
+
+.icon-quanbucheliang-shouye-zhong:before {
+  content: "\e719";
+}
+
+.icon-shouye-zhong:before {
+  content: "\e71a";
+}
+
+.icon-touxiang-mo:before {
+  content: "\e71b";
+}
+
+.icon-quanbucheliang-wode:before {
+  content: "\e71c";
+}
+
+.icon-quanbucheliang-shouye-mo:before {
+  content: "\e71d";
+}
+
+.icon-shenhezhong:before {
+  content: "\e71e";
+}
+
+.icon-yuanxingtouxiang:before {
+  content: "\e71f";
+}
+
+.icon-changjianwenti:before {
+  content: "\e720";
+}
+
+.icon-xiaoxi-pingtaitixing:before {
+  content: "\e721";
+}
+
+.icon-shouye-mo:before {
+  content: "\e722";
+}
+
+.icon-xiaoxi-cheliangtixing:before {
+  content: "\e723";
+}
+
+.icon-wode-zhong:before {
+  content: "\e724";
+}
+
+.icon-xiaoxi:before {
+  content: "\e725";
+}
+
+.icon-zhanghaoyuanquan-wode:before {
+  content: "\e726";
+}
+
+.icon-yitongguo:before {
+  content: "\e727";
+}
+
+.icon-weitongguo:before {
+  content: "\e728";
+}
+
+.icon-chepaihao:before {
+  content: "\e729";
+}
+

@@ -26,8 +26,9 @@
     │       └── tabbar             // 底部栏配置
     ├── static                     // 公共文件
     │   ├── favicon.ico            // favicon图标
-    │   └── index.html             // html模板
+    │   └── iconfont               // iconfont图标
     │   └── logo.png               // logo图片
+    │   └── style                  // style样式
     ├── uni_modules                // uniui组件
     │   └── uview-ui               // uview
     ├── App.vue                    // 应用配置
