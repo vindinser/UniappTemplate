@@ -37,6 +37,9 @@
 			}
 		}
 	],
+	"subPackages": [{
+		"root": "" // 公共界面
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "LossAssessmentAPP",
