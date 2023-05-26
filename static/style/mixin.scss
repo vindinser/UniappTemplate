@@ -1,0 +1,31 @@
+// scss混入
+
+
+// scss混入，为了少写几行#ifndef
+@mixin flex($direction: row) {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: $direction;
+}
+
+// custom-flex flex
+@mixin custom-flex($direction: row, $align: null, $justify: null, $wrap: null) {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: $direction;
+	align-items: $align;
+	justify-content: $justify;
+	flex-wrap: $wrap;
+}
+
+// 字体
+@mixin custom-text($c: null, $s: 14px, $h: null, $w: 400, $style: normal, $H: null) {
+  color: $c;
+  height: $h;
+  line-height: $H;
+  font-size: $s;
+  font-weight: $w;
+  font-style: $style;
+}
