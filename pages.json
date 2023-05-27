@@ -38,7 +38,14 @@
 		}
 	],
 	"subPackages": [{
-		"root": "" // 公共界面
+		"root": "pages/assess", // 公共界面
+		"pages": [{
+			"path": "index/index",
+			"style": {
+				"navigationBarTitleText": "定损",
+				"navigationStyle": "default"
+			}
+		}]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

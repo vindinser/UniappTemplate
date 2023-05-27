@@ -17,7 +17,7 @@
 				<u-form-item label="验证码" prop="code">
 					<u-input v-model="loginForm.code" type="number" placeholder="输入验证码">
 						<template slot="suffix">
-							<u-code ref="uCode" @change="(text) => tips = text" seconds="60" changeText="X秒重新获取哈哈哈" />
+							<u-code ref="uCode" @change="(text) => tips = text" seconds="60" changeText="X秒重新获取" />
 							<u-button @tap="getCode" :text="tips" type="primary" size="mini" />
 						</template>
 					</u-input>
@@ -83,6 +83,6 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import './style/index.scss';
 </style>

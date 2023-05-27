@@ -6,8 +6,15 @@ body {
 	@include flex($direction: column);
 	box-sizing: border-box;
 	width: 100vw;
-	min-height: 100vh;
 	position: relative;
+	
+	/* #ifdef MP-WEIXIN */
+		min-height: 100vh;
+	/* #endif */
+	
+	/* #ifndef MP-WEIXIN */
+		min-height: calc(100vh - 50px);
+	/* #endif */
 }
 
 .u-navbar--fixed {

@@ -71,6 +71,7 @@
 				this.$refs.loginForm.validate().then(res => {
 					// this.loading = true
 					console.log('login')
+					this.$tab.switchTab(`/pages/tabbar/my/my`)
 				})
 			},
 			// 找回密码/立即注册
@@ -86,6 +87,6 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import './style/index.scss';
 </style>
