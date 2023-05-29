@@ -7,20 +7,19 @@ export function register(data) {
 		headers: {
 			isToken: false
 		},
-		'method': 'post',
 		data
 	})
 }
 
 // 获取验证码
-export function phoneCode(data) {
+export function phoneCode(data, showLoadingTitle) {
 	return request({
 		'url': '/user/phoneCode',
 		headers: {
 			isToken: false
 		},
-		'method': 'post',
-		data
+		data,
+		showLoadingTitle
 	})
 }
 

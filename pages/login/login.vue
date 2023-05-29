@@ -53,8 +53,8 @@
 		data: () => ({
 			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
 			loginForm: {
-				username: 'admin',
-				password: 'admin123',
+				username: '17360776223',
+				password: '123456',
 				code: '',
 				uuid: ''
 			}, // 登录表单
