@@ -11,6 +11,17 @@ export function toast(content) {
 }
 
 /**
+ * 显示加载
+ * @param title 提示的标题
+ */
+export function loading(title) {
+	uni.showLoading({
+		title,
+		mask: true
+	})
+}
+
+/**
  * 显示模态弹窗
  * @param content 提示的标题
  */

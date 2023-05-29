@@ -6,7 +6,7 @@ const sys = uni.$u.sys()
 module.exports = {
 	config: {
 		// 本地开发
-		baseUrl: 'https://192.168.7.113:9001',
+		baseUrl: 'http://192.168.7.113:9001',
 		
 		// 测试
 		newUpload: 'http://27.128.238.14:8007/files/fileSubmit', // 图片上传（路径）
