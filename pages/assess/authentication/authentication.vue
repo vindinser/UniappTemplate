@@ -24,7 +24,7 @@
 			AuthenticaDetail
 		},
 		data: () => ({
-			isAudit: true, // true: 已提交过审核 false： 未提交过审核
+			isAudit: false, // true: 已提交过审核 false： 未提交过审核
 		}),
 		methods: {
 			

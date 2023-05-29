@@ -43,7 +43,7 @@
 			emptyString: '',
 			settingList: [
 				{ icon: 'icon-renzheng-wode', name: '定损员认证', color: '#5AC725', path: '/pages/assess/authentication/authentication' },
-				{ icon: 'icon-zhanghaoyuanquan-wode', name: '账号与安全', color: '#EAAA08', path: '' },
+				{ icon: 'icon-zhanghaoyuanquan-wode', name: '账号与安全', color: '#EAAA08', path: '/pages/set/account/account' },
 				{ icon: 'icon-shezhi-wode', name: '设置', color: '#1570EF', path: '' },
 				{ icon: 'icon-tixing', name: '消息', color: '#1570EF', path: '' }
 			]
