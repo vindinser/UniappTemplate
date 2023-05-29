@@ -5,8 +5,8 @@ const sys = uni.$u.sys()
 
 module.exports = {
 	config: {
-		baseUrl: 'https://vue.ruoyi.vip/prod-api',
-		// baseUrl: '/dev-api',
+		// 本地开发
+		baseUrl: 'https://192.168.7.113:9001',
 		
 		// 测试
 		newUpload: 'http://27.128.238.14:8007/files/fileSubmit', // 图片上传（路径）
@@ -16,16 +16,6 @@ module.exports = {
 		// newUpload: 'http://erp.hzdfpm.com:9097/files/fileSubmit',
 		// thumbnail_1080: 'http://erp.hzdfpm.com:8001/pic_thumbnail_1080',
 		
-		// #ifdef H5
-		// baseUrl: '/dev-api',
-		preseUrl: '/prese-api',
-		// #endif
-		// #ifndef H5
-		// baseUrl: 'http://192.168.7.139:9000',
-		preseUrl: 'http://192.168.7.139:9301',
-		// #endif
-		
-		selectUrl: 'http://192.168.7.161/select-parking-space',
 		tabbar: [ ...tabbar ],
 	},
 	color: {

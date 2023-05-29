@@ -1,5 +1,29 @@
 import request from '@/common/untils/httpUntil.js'
 
+// 注册
+export function register(data) {
+	return request({
+		'url': '/user/register',
+		headers: {
+			isToken: false
+		},
+		'method': 'post',
+		data
+	})
+}
+
+// 获取验证码
+export function phoneCode(data) {
+	return request({
+		'url': '/user/phoneCode',
+		headers: {
+			isToken: false
+		},
+		'method': 'post',
+		data
+	})
+}
+
 // 登录方法
 export function login(username, password, code, uuid) {
 	const data = {
