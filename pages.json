@@ -45,6 +45,11 @@
 				"navigationBarTitleText": "定损",
 				"navigationStyle": "default"
 			}
+		}, {
+			"path": "authentication/authentication",
+			"style": {
+				"navigationBarTitleText": "定损员认证"
+			}
 		}]
 	}],
 	"globalStyle": {

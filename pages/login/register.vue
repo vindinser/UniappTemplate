@@ -67,6 +67,8 @@
 </template>
 
 <script>
+	import { phoneCode, register } from '@/api/login'
+	
 	export default {
 		data: () => ({
 			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
@@ -99,6 +101,13 @@
 					uni.showLoading({
 						title: '正在获取验证码'
 					})
+					// phoneCode({
+					// 	userPhone: 17360776223
+					// }).then(res => {
+					// 	console.log(res)
+					// }).catch(err => {
+					// 	console.log(err)
+					// }).finally(() => uni.hideLoading())
 					setTimeout(() => {
 						uni.hideLoading();
 						// 这里此提示会被this.start()方法中的提示覆盖

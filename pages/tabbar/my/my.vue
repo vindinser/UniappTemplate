@@ -12,7 +12,7 @@
 		</view>
 		<!-- 用户设置 -->
 		<view class="user-box_setting">
-			<view class="user-box_setting-cars setting-item">
+			<view class="user-box_setting-cars setting-item" @click="$tab.switchTab(`/pages/tabbar/cars/cars`)">
 				<text class="iconfont icon-quanbucheliang-shouye-zhong" :style="{ color: $u.config.color[`u-primary`] }" />
 				<text>全部车辆</text>
 				<view class="setting-item_icon">
@@ -42,7 +42,7 @@
 			unLogin,
 			emptyString: '',
 			settingList: [
-				{ icon: 'icon-renzheng-wode', name: '定损员认证', color: '#5AC725', path: '' },
+				{ icon: 'icon-renzheng-wode', name: '定损员认证', color: '#5AC725', path: '/pages/assess/authentication/authentication' },
 				{ icon: 'icon-zhanghaoyuanquan-wode', name: '账号与安全', color: '#EAAA08', path: '' },
 				{ icon: 'icon-shezhi-wode', name: '设置', color: '#1570EF', path: '' },
 				{ icon: 'icon-tixing', name: '消息', color: '#1570EF', path: '' }
@@ -52,7 +52,7 @@
 			// 点击跳转设置项
 			handleItemClick({ path }) {
 				console.log(path)
-				// this.$tab.to(path)
+				this.$tab.to(path)
 			}
 		}
 	}

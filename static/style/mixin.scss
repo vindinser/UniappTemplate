@@ -21,11 +21,13 @@
 }
 
 // 字体
-@mixin custom-text($c: null, $s: 14px, $h: null, $w: 400, $style: normal, $H: null) {
+@mixin custom-text($c: null, $s: 14px, $h: null, $w: 400, $style: normal, $H: null, $ls: null, $ff: 'PingFang SC') {
   color: $c;
   height: $h;
   line-height: $H;
   font-size: $s;
   font-weight: $w;
   font-style: $style;
+  letter-spacing: $ls;
+  font-family: $ff;
 }
