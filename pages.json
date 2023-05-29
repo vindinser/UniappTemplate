@@ -77,7 +77,7 @@
 		// "iconfontSrc":"/static/iconfont/iconfont.ttf", //图标路径
 		"list": [{
 			"pagePath": "pages/tabbar/index/index",
-			"iconPath": "static/image/tabbar/cars.png",
+			"iconPath": "static/image/tabbar/index.png",
 			"selectedIconPath": "static/image/tabbar/index-select.png",
 			// "iconfont": {
 			// 	"fontSize": "22px",
