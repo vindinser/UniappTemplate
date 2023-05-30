@@ -1,15 +1,15 @@
 <!-- 设置新密码登录 -->
 <template>
-	<view class="u-sys login-box">
+	<view class="login-box">
 		<!-- 顶部导航栏(如不写，需条件编译微信小程序样式) -->
 		<u-navbar :title="emptyString" auto-back />
 		<!-- 登录头部 -->
-		<view class="login-head">
+		<view class="login-box_head">
 			<text>设置新密码登录</text>
-			<text class="login-head_secondary-info">请保持两次密码输入一致</text>
+			<text class="login-box_head_secondary-info">请保持两次密码输入一致</text>
 		</view>
 		<!-- 登录表单 -->
-		<view class="login-form">
+		<view class="login-box_form">
 			<u-form ref="loginForm" :model="loginForm" :rules="rules">
 				<u-form-item label="登录密码" prop="password">
 					<!-- #ifdef APP-PLUS -->
@@ -46,7 +46,7 @@
 				<u-button text="确认" type="primary" :loading="loading" @click="handleLogin" />
 			</view>
 		</view>
-		<view class="accept-terms">
+		<view class="login-box_accept-terms">
 			<text class="u-tips-color">登录即代表同意</text>
 			<text class="u-primary" @click="handleAgrement">《用户协议》</text>
 			<text class="u-tips-color">与</text>

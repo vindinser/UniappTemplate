@@ -1,15 +1,15 @@
 <!-- 登录页 -->
 <template>
-	<view class="u-sys login-box">
+	<view class="login-box">
 		<!-- 顶部导航栏(如不写，需条件编译微信小程序样式) -->
 		<u-navbar :title="emptyString" :left-icon="emptyString" :auto-back="false" />
 		<!-- 登录头部 -->
-		<view class="login-head">
+		<view class="login-box_head">
 			<text>欢迎使用华正拍卖平台</text>
 			<!-- <view class="">未注册过的手机号请先注册</view> -->
 		</view>
 		<!-- 登录表单 -->
-		<view class="login-form">
+		<view class="login-box_form">
 			<u-form ref="loginForm" :model="loginForm" :rules="rules">
 				<u-form-item label="手机号码" prop="username">
 					<u-input v-model="loginForm.username" placeholder="输入手机号码" />
@@ -39,7 +39,7 @@
 				<text class="u-primary" @click="registerBtnClick('register')">立即注册</text>
 			</view>
 		</view>
-		<view class="accept-terms">
+		<view class="login-box_accept-terms">
 			<text class="u-tips-color">登录即代表同意</text>
 			<text class="u-primary" @click="handleAgrement">《用户协议》</text>
 			<text class="u-tips-color">与</text>
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+	import { login } from '@/api/login'
+	
 	export default {
 		data: () => ({
 			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
@@ -71,7 +73,15 @@
 				this.$refs.loginForm.validate().then(res => {
 					// this.loading = true
 					console.log('login')
-					this.$tab.switchTab(`/pages/tabbar/my/my`)
+					// this.$tab.switchTab(`/pages/tabbar/my/my`)
+					login({
+						userPhone: this.loginForm.userPhone,
+						password: this.loginForm.password
+					}).then(res => {
+						console.log(res)
+					}).catch(err => {
+						console.log(err)
+					})
 				})
 			},
 			// 找回密码/立即注册

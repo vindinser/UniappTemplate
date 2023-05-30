@@ -1,15 +1,15 @@
 <!-- 注册 -->
 <template>
-	<view class="u-sys login-box">
+	<view class="login-box">
 		<!-- 顶部导航栏(如不写，需条件编译微信小程序样式) -->
 		<u-navbar :title="emptyString" :left-icon="emptyString" :auto-back="false" />
 		<!-- 登录头部 -->
-		<view class="login-head">
+		<view class="login-box_head">
 			<text>注册华正拍卖平台</text>
 			<text class="login-head_secondary-info">未注册过的手机号码请先注册</text>
 		</view>
 		<!-- 登录表单 -->
-		<view class="login-form">
+		<view class="login-box_form">
 			<u-form ref="loginForm" :model="loginForm" :rules="rules">
 				<u-form-item label="手机号码" prop="userPhone">
 					<u-input v-model="loginForm.userPhone" placeholder="输入手机号码" />
@@ -57,7 +57,7 @@
 				<u-button text="注册" type="primary" :loading="loading" @click="handleLogin" />
 			</view>
 		</view>
-		<view class="accept-terms">
+		<view class="login-box_accept-terms">
 			<text class="u-tips-color">登录即代表同意</text>
 			<text class="u-primary" @click="handleAgrement">《用户协议》</text>
 			<text class="u-tips-color">与</text>
