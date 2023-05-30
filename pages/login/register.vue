@@ -73,7 +73,6 @@
 	export default {
 		mixins: [mixin],
 		data: () => ({
-			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
 			loginForm: {
 				userPhone: '', // 手机号码
 				password1: '', // 登录密码
@@ -88,8 +87,7 @@
 			}, // 注册表单验证规则
 			loginPwdIsShow: true, // 登录密码输入框状态
 			confrimPwdIsShow: true, // 确认密码输入框状态
-			loading: false, // 登录按钮加载状态
-			tips: ''
+			loading: false // 登录按钮加载状态
 		}),
 		methods: {
 			// 注册按钮点击事件

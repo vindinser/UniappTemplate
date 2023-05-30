@@ -3,12 +3,12 @@
 	<view class="login-box">
 		<!-- 顶部导航栏(如不写，需条件编译微信小程序样式) -->
 		<u-navbar :title="emptyString" auto-back />
-		<!-- 登录头部 -->
+		<!-- 找回密码头部 -->
 		<view class="login-box_head">
 			<text>找回密码</text>
 			<text class="login-head_secondary-info">通过验证码找回密码</text>
 		</view>
-		<!-- 登录表单 -->
+		<!-- 找回密码表单 -->
 		<view class="login-box_form">
 			<u-form ref="loginForm" :model="loginForm" :rules="rules">
 				<u-form-item label="手机号码" prop="userPhone">
@@ -42,19 +42,17 @@
 	export default {
 		mixins: [mixin],
 		data: () => ({
-			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
 			loginForm: {
 				userPhone: '',
 				code: ''
-			}, // 登录表单
+			}, // 找回密码表单
 			rules: {
 				userPhone: [{ required: true, message: '请输入手机号码' } ],
 				code: [{ required: true, message: '请输入验证码' } ]
-			}, // 登录表单验证规则
-			tips: ''
+			}, // 找回密码表单验证规则
 		}),
 		methods: {
-			// 登录按钮点击事件
+			// 下一步按钮点击事件
 			handleLogin() {
 				this.$refs.loginForm.validate().then(res => {
 					this.$tab.to(`/pages/login/edit-password`)
