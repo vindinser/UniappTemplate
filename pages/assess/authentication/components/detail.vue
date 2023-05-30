@@ -2,7 +2,7 @@
 <template>
 	<view class="u-sys u-p-32">
 		<view class="audit-info">
-			<view class="audit-info_item" v-for="item, index in auditInfo" :key="'auditInfo-' + index">
+			<view class="audit-info_item" v-for="item, index in auditInfo" :key="index">
 				<view class="audit-info_item-name">{{ item.name }}</view>
 				<view class="audit-info_item-value">{{ item.value }}</view>
 			</view>

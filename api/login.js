@@ -24,19 +24,12 @@ export function phoneCode(data, showLoadingTitle) {
 }
 
 // 登录方法
-export function login(username, password, code, uuid) {
-	const data = {
-		username,
-		password,
-		code,
-		uuid
-	}
+export function login(data) {
 	return request({
-		'url': '/login',
+		'url': '/user/login',
 		headers: {
 			isToken: false
 		},
-		'method': 'post',
 		'data': data
 	})
 }
