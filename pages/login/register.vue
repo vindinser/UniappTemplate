@@ -89,6 +89,9 @@
 			confrimPwdIsShow: true, // 确认密码输入框状态
 			loading: false // 登录按钮加载状态
 		}),
+		onLoad({ userPhone = ''}) {
+			userPhone !== '' && (this.loginForm.userPhone = userPhone)
+		},
 		methods: {
 			// 注册按钮点击事件
 			handleLogin() {

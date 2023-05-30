@@ -23,10 +23,32 @@ export function phoneCode(data, showLoadingTitle) {
 	})
 }
 
-// 登录方法
+// 登录
 export function login(data) {
 	return request({
 		'url': '/user/login',
+		headers: {
+			isToken: false
+		},
+		'data': data
+	})
+}
+
+// 判断验证码
+export function determineCode(data) {
+	return request({
+		'url': '/user/determineCode',
+		headers: {
+			isToken: false
+		},
+		'data': data
+	})
+}
+
+// 重置密码
+export function resetPassword(data) {
+	return request({
+		'url': '/user/resetPassword',
 		headers: {
 			isToken: false
 		},

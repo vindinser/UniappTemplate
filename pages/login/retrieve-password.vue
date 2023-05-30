@@ -38,6 +38,7 @@
 
 <script>
 	import mixin from './mixin/mixin'
+	import { determineCode } from '@/api/login.js'
 	
 	export default {
 		mixins: [mixin],
@@ -51,12 +52,20 @@
 				code: [{ required: true, message: '请输入验证码' } ]
 			}, // 找回密码表单验证规则
 		}),
+		onLoad({ userPhone = ''}) {
+			userPhone !== '' && (this.loginForm.userPhone = userPhone)
+		},
 		methods: {
 			// 下一步按钮点击事件
 			handleLogin() {
 				this.$refs.loginForm.validate().then(res => {
-					
-					this.$tab.to(`/pages/login/edit-password`)
+					determineCode(this.loginForm).then(res => {
+						const paramUrl = uni.$u.queryParams(this.loginForm)
+						this.$tab.to(`/pages/login/edit-password${ paramUrl }`)
+					}).catch(err => {
+						console.error(err)
+						err === '验证码有误' && (this.loginForm.code = '')
+					})
 				})
 			},
 			// 协议点击事件

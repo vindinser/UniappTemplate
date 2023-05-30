@@ -11,8 +11,8 @@
 		<!-- 登录表单 -->
 		<view class="login-box_form">
 			<u-form ref="loginForm" :model="loginForm" :rules="rules">
-				<u-form-item label="手机号码" prop="username">
-					<u-input v-model="loginForm.username" placeholder="输入手机号码" />
+				<u-form-item label="手机号码" prop="userPhone">
+					<u-input v-model="loginForm.userPhone" placeholder="输入手机号码" />
 				</u-form-item>
 				<u-form-item label="登录密码" prop="password">
 					<!-- #ifdef APP-PLUS -->
@@ -55,13 +55,13 @@
 		data: () => ({
 			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
 			loginForm: {
-				username: '17360776223',
+				userPhone: '17360776223',
 				password: '123456',
 				code: '',
 				uuid: ''
 			}, // 登录表单
 			rules: {
-				username: [{ required: true, message: '请输入手机号码' } ],
+				userPhone: [{ required: true, message: '请输入手机号码' } ],
 				password: [{ required: true, message: '请输入登录密码' } ]
 			}, // 登录表单验证规则
 			password: true, // 密码输入框状态
@@ -87,7 +87,7 @@
 			// 找回密码/立即注册
 			registerBtnClick(operaType) {
 				console.log(operaType, this.$tab)
-				this.$tab.to(`/pages/login/${ operaType }`)
+				this.$tab.to(`/pages/login/${ operaType }?userPhone=${ this.loginForm.userPhone }`)
 			},
 			// 协议点击事件
 			handleAgrement() {
