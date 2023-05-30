@@ -4,7 +4,13 @@ import constant from './constantUntil.js'
 let storageKey = 'storage_data'
 
 // 存储节点变量名
-let storageNodeKeys = [constant.avatar, constant.userId, constant.name, constant.roles, constant.permissions]
+let storageNodeKeys = [
+	constant.userId,
+	constant.userPhone,
+	constant.userName,
+	constant.insureCompanyName,
+	constant.auditStatus
+]
 
 // 存储的数据
 let storageData = uni.getStorageSync(storageKey) || {}

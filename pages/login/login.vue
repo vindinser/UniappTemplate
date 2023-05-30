@@ -71,22 +71,25 @@
 			// 登录按钮点击事件
 			handleLogin() {
 				this.$refs.loginForm.validate().then(res => {
-					// this.loading = true
-					console.log('login')
-					// this.$tab.switchTab(`/pages/tabbar/my/my`)
-					login({
-						userPhone: this.loginForm.userPhone,
-						password: this.loginForm.password
-					}).then(res => {
-						console.log(res)
+					this.loading = true
+					this.$store.dispatch('Login', this.loginForm).then(() => {
+						this.loginSuccess()
 					}).catch(err => {
-						console.log(err)
+						console.error(err)
+						this.loading = false
 					})
+				})
+			},
+			// 登录成功
+			loginSuccess() {
+				this.$store.dispatch('GetUserInfo').then(() => {
+					this.$tab.reLaunch(`/pages/tabbar/index/index`)
+				}).finally(() => {
+					this.loading = false
 				})
 			},
 			// 找回密码/立即注册
 			registerBtnClick(operaType) {
-				console.log(operaType, this.$tab)
 				this.$tab.to(`/pages/login/${ operaType }?userPhone=${ this.loginForm.userPhone }`)
 			},
 			// 协议点击事件

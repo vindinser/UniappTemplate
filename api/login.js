@@ -56,11 +56,10 @@ export function resetPassword(data) {
 	})
 }
 
-// 获取用户详细信息
-export function getInfo() {
+// 获取用户信息
+export function personalData() {
 	return request({
-		'url': '/getInfo',
-		'method': 'get'
+		'url': '/user/personalData'
 	})
 }
 

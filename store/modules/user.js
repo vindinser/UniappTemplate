@@ -1,7 +1,7 @@
 import { config } from '@/common/config'
 import storage from '@/common/untils/storageUntil.js'
 import constant from '@/common/untils/constantUntil.js'
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout, personalData } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/untils/authUntil.js'
 
 const baseUrl = config.baseUrl
@@ -10,10 +10,9 @@ const user = {
 	state: {
 		token: getToken(),
 		userId: storage.get(constant.userId),
-		name: storage.get(constant.name),
-		avatar: storage.get(constant.avatar),
-		roles: storage.get(constant.roles),
-		permissions: storage.get(constant.permissions)
+		userPhone: storage.get(constant.userPhone),
+		userName: storage.get(constant.userName),
+		insureCompanyName: storage.get(constant.insureCompanyName)
 	},
 
 	mutations: {
@@ -24,35 +23,36 @@ const user = {
 			state.userId = userId
 			storage.set(constant.userId, userId)
 		},
-		SET_NAME: (state, name) => {
-			state.name = name
-			storage.set(constant.name, name)
+		SET_USERPHONE: (state, userPhone) => {
+			state.userPhone = userPhone
+			storage.set(constant.userPhone, userPhone)
 		},
-		SET_AVATAR: (state, avatar) => {
-			state.avatar = avatar
-			storage.set(constant.avatar, avatar)
+		SET_USERNAME: (state, userName) => {
+			state.userName = userName
+			storage.set(constant.userName, userName)
 		},
-		SET_ROLES: (state, roles) => {
-			state.roles = roles
-			storage.set(constant.roles, roles)
+		SET_COMPANY: (state, insureCompanyName) => {
+			state.insureCompanyName = insureCompanyName
+			storage.set(constant.insureCompanyName, insureCompanyName)
 		},
-		SET_PERMISSIONS: (state, permissions) => {
-			state.permissions = permissions
-			storage.set(constant.permissions, permissions)
-		}
+		SET_AUDITSTATUS: (state, auditStatus) => {
+			state.auditStatus = auditStatus
+			storage.set(constant.auditStatus, auditStatus)
+		},
 	},
 
 	actions: {
 		// 登录
 		Login({ commit }, userInfo) {
-			const username = userInfo.username.trim()
+			const userPhone = userInfo.userPhone.trim()
 			const password = userInfo.password
-			const code = userInfo.code
-			const uuid = userInfo.uuid
 			return new Promise((resolve, reject) => {
-				login(username, password, code, uuid).then(res => {
-					setToken(res.token)
-					commit('SET_TOKEN', res.token)
+				login({
+					userPhone,
+					password
+				}).then(res => {
+					setToken(res.data.token)
+					commit('SET_TOKEN', res.data.token)
 					resolve()
 				}).catch(error => {
 					reject(error)
@@ -61,22 +61,16 @@ const user = {
 		},
 
 		// 获取用户信息
-		GetInfo({ commit, state }) {
+		GetUserInfo({ commit, state }) {
 			return new Promise((resolve, reject) => {
-				getInfo().then(res => {
-					const user = res.user
-					const avatar = (user == null || user.avatar == '' || user.avatar == null) ? require('@/static/image/profile.jpg') : baseUrl + user.avatar
-					const username = (user == null || user.userName == '' || user.userName == null) ? '' : user.userName
-					const userId = (user == null || user.userId == '' || user.userId == null) ? '' : String(user.userId)
-					if (res.roles && res.roles.length > 0) {
-						commit('SET_ROLES', res.roles)
-						commit('SET_PERMISSIONS', res.permissions)
-					} else {
-						commit('SET_ROLES', ['ROLE_DEFAULT'])
-					}
-					commit('SET_NAME', username)
-					commit('SET_USERID', userId)
-					commit('SET_AVATAR', avatar)
+				personalData().then(res => {
+					const data = res.data
+					console.log(data)
+					commit('SET_USERID', data.userNumber)
+					commit('SET_USERPHONE', data.userPhone)
+					commit('SET_USERNAME', data.userName)
+					commit('SET_COMPANY', data.insureCompanyName)
+					commit('SET_AUDITSTATUS', data.lossAdjusterCertification)
 					resolve(res)
 				}).catch(error => {
 					reject(error)

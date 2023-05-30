@@ -13,7 +13,7 @@ const request = config => {
 	const isToken = (config.headers || {}).isToken === false
 	config.header = config.header || {}
 	if (getToken() && !isToken) {
-		config.header['Authorization'] = 'Bearer ' + getToken()
+		config.header['token'] = getToken()
 	}
 	// get请求映射params参数
 	if (config.params) {
