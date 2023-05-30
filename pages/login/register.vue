@@ -6,7 +6,7 @@
 		<!-- 注册头部 -->
 		<view class="login-box_head">
 			<text>注册华正拍卖平台</text>
-			<text class="login-head_secondary-info">未注册过的手机号码请先注册</text>
+			<text class="login-box_head_secondary-info">未注册过的手机号码请先注册</text>
 		</view>
 		<!-- 注册表单 -->
 		<view class="login-box_form">

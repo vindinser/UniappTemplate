@@ -6,7 +6,7 @@
 		<!-- 找回密码头部 -->
 		<view class="login-box_head">
 			<text>找回密码</text>
-			<text class="login-head_secondary-info">通过验证码找回密码</text>
+			<text class="login-box_head_secondary-info">通过验证码找回密码</text>
 		</view>
 		<!-- 找回密码表单 -->
 		<view class="login-box_form">
@@ -55,6 +55,7 @@
 			// 下一步按钮点击事件
 			handleLogin() {
 				this.$refs.loginForm.validate().then(res => {
+					
 					this.$tab.to(`/pages/login/edit-password`)
 				})
 			},
