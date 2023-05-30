@@ -3,12 +3,12 @@
 	<view class="login-box">
 		<!-- 顶部导航栏(如不写，需条件编译微信小程序样式) -->
 		<u-navbar :title="emptyString" :left-icon="emptyString" :auto-back="false" />
-		<!-- 登录头部 -->
+		<!-- 注册头部 -->
 		<view class="login-box_head">
 			<text>注册华正拍卖平台</text>
 			<text class="login-head_secondary-info">未注册过的手机号码请先注册</text>
 		</view>
-		<!-- 登录表单 -->
+		<!-- 注册表单 -->
 		<view class="login-box_form">
 			<u-form ref="loginForm" :model="loginForm" :rules="rules">
 				<u-form-item label="手机号码" prop="userPhone">
@@ -67,9 +67,11 @@
 </template>
 
 <script>
-	import { phoneCode, register } from '@/api/login'
+	import { register } from '@/api/login'
+	import mixin from './mixin/mixin'
 	
 	export default {
+		mixins: [mixin],
 		data: () => ({
 			emptyString: '', // 如果直接在标签中写空串则微信小程序展示为true
 			loginForm: {
@@ -77,20 +79,20 @@
 				password1: '', // 登录密码
 				password2: '', // 确认密码
 				code: '' // 验证码
-			}, // 登录表单
+			}, // 注册表单
 			rules: {
 				userPhone: [{ required: true, message: '请输入手机号码', trigger: ['blur', 'change'] } ],
 				password1: [{ required: true, message: '请输入6位以上登录密码', trigger: ['blur', 'change'], min: 6 }],
 				password2: [{ required: true, message: '请确认密码', trigger: ['blur', 'change'], min: 6 }],
 				code: [{ required: true, message: '请输入验证码', trigger: ['blur', 'change'], max: 4 } ]
-			}, // 登录表单验证规则
+			}, // 注册表单验证规则
 			loginPwdIsShow: true, // 登录密码输入框状态
 			confrimPwdIsShow: true, // 确认密码输入框状态
 			loading: false, // 登录按钮加载状态
 			tips: ''
 		}),
 		methods: {
-			// 登录按钮点击事件
+			// 注册按钮点击事件
 			handleLogin() {
 				if(this.loginForm.password1 !== this.loginForm.password2) return this.$modal.msg('两次密码输入不一致！')
 				this.$refs.loginForm.validate().then(res => {
@@ -113,23 +115,6 @@
 						}
 					}).finally(() => this.loading = false)
 				})
-			},
-			// 获取验证码
-			async getCode() {
-				// 正则验证手机号是否合法
-				const reg = /^1[3,4,5,6,7,8,9][0-9]{9}$/;
-				const regRes = reg.test(this.loginForm.userPhone)
-				if (this.$refs.uCode.canGetCode && regRes) {
-					const res = await phoneCode({
-						userPhone: this.loginForm.userPhone
-					}, '正在获取验证码')
-					this.$modal.msg('验证码已发送')
-					// 通知验证码组件内部开始倒计时
-					this.$refs.uCode.start()
-				} else {
-					const modelMsg = regRes ? '倒计时结束后再发送' : '请输入合法的手机号'
-					this.$modal.msg(modelMsg)
-				}
 			},
 			// 协议点击事件
 			handleAgrement() {
