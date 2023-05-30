@@ -12,6 +12,9 @@
 				
 			}
 		},
+		onLoad() {
+			console.log(this.$store.getters.auditStatus)
+		},
 		methods: {
 			
 		}

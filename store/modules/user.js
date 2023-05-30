@@ -12,7 +12,8 @@ const user = {
 		userId: storage.get(constant.userId),
 		userPhone: storage.get(constant.userPhone),
 		userName: storage.get(constant.userName),
-		insureCompanyName: storage.get(constant.insureCompanyName)
+		insureCompanyName: storage.get(constant.insureCompanyName),
+		auditStatus: storage.get(constant.auditStatus)
 	},
 
 	mutations: {
