@@ -11,6 +11,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-renzheng:before {
+  content: "\e87c";
+}
+
 .icon-tixing:before {
   content: "\e72a";
 }
