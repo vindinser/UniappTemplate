@@ -5,6 +5,10 @@
 		<u--image src="/static/image/index/index-bg.png" width="100vw" mode="widthFix" />
 		<!-- 内容 -->
 		<view class="index-box">
+			<!-- 通知 -->
+			<view class="u-m-b-32" v-if="this.$store.getters.auditStatus !== 1">
+				<u-notice-bar text="请先进行认证,审核通过后可进行功能操作" />
+			</view>
 			<!-- 公示 -->
 			<view class="index-box_top">
 				<view class="index-box_top-item" v-for="item, index in iconList" :key="index" @click="iconItomClick(item)">

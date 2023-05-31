@@ -1,6 +1,6 @@
 <template>
 	<view>
-		cars
+		cars123
 	</view>
 </template>
 
@@ -10,6 +10,14 @@
 			return {
 				
 			}
+		},
+		onShow() {
+			// 未认证弹窗认证
+			this.$tools.certificationPrompt()
+		},
+		onTabItemTap(e) {
+			// tab 点击时执行，此处直接接收单击事件
+			console.log(e)
 		},
 		methods: {
 			

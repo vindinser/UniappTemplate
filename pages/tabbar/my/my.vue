@@ -6,8 +6,18 @@
 		<view class="user-box_info">
 			<u-avatar :src="login" mode="widthFix" size="56" />
 			<view class="info-inner">
-				<text class="info-inner__name">张三</text>
-				<view class="info-inner__intr">华正残值服务平台快捷查询残值车</view>
+				<view class="info-inner_top">
+					<text class="info-inner_top-name">{{ $store.getters.userName || '未认证' }}</text>
+					<text v-if="this.$store.getters.auditStatus === 1" class="info-inner_top-status">
+						<text class="iconfont icon-renzheng" />
+						<text>定损员已认证</text>
+					</text>
+				</view>
+				<view class="info-inner__intr" @click="handleItemClick(baseInfoPath)">
+					<text>{{ $tools.encryptionPhoneNo($store.getters.userPhone) }}</text>
+					<text>查看并编辑个人资料</text>
+					<u-icon name="arrow-right" color="#fff" size="15px" />
+				</view>
 			</view>
 		</view>
 		<!-- 用户设置 -->
@@ -46,13 +56,21 @@
 				{ icon: 'icon-zhanghaoyuanquan-wode', name: '账号与安全', color: '#EAAA08', path: '/pages/set/account/account' },
 				{ icon: 'icon-shezhi-wode', name: '设置', color: '#1570EF', path: '/pages/set/setting/setting' },
 				{ icon: 'icon-tixing', name: '消息', color: '#1570EF', path: '' }
-			]
+			],
+			baseInfoPath: {
+				path: ''
+			}
 		}),
+		onShow() {
+			if(this.$store.getters.auditStatus !== 1) {
+				console.log('获取定损员信息')
+			}
+		},
 		methods: {
 			// 点击跳转设置项
 			handleItemClick({ path }) {
 				console.log(path)
-				this.$tab.to(path)
+				// this.$tab.to(path)
 			}
 		}
 	}
@@ -73,9 +91,32 @@
 				height: 56px;
 				@include custom-flex($direction: column, $justify: center);
 				
-				&__name {
-					font-size: 18px;
-					font-weight: 600;
+				&_top {
+					color: $u-white-color;
+					@include custom-flex($align: center);
+					
+					&-name {
+						font-size: 18px;
+						line-height: 24px;
+						font-weight: 600;
+					}
+					
+					&-status {
+						margin-left: 8px;
+						border-radius: 4px;
+						padding: 2px;
+						background-color: $uni-bg-color;
+						@include custom-text($c: #5AC725, $s: 11px, $H: 13px, $ls: 0.066px);
+					}
+				}
+				
+				&__intr {
+					margin-top: 4px;
+					@include custom-flex($align: center);
+					
+					> text:nth-child(2) {
+						margin: 0 4px;
+					}
 				}
 			}
 		}
