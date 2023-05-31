@@ -40,8 +40,8 @@
 			],
 			stepList: ['填写车辆相关信息', '华正线上下线同步车辆接收状态']
 		}),
-		onLoad() {
-			console.log(this.$store.getters.auditStatus)
+		onShow() {
+			this.$tools.certificationPrompt()
 		},
 		methods: {
 			// icon点击事件

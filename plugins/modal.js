@@ -36,17 +36,16 @@ export default {
 		})
 	},
 	// 确认窗体
-	confirm(content, title = '系统提示') {
+	confirm(content, title = '系统提示', cancelText = '取消', confirmText = '确定') {
 		return new Promise((resolve, reject) => {
 			uni.showModal({
 				title,
 				content,
-				cancelText: '取消',
-				confirmText: '确定',
+				cancelText,
+				confirmText,
 				success: function(res) {
-					if (res.confirm) {
-						resolve(res.confirm)
-					}
+					res.confirm && resolve(res.confirm)
+					res.cancel && reject(res.cancel)
 				}
 			})
 		})

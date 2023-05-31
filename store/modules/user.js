@@ -66,7 +66,6 @@ const user = {
 			return new Promise((resolve, reject) => {
 				personalData().then(res => {
 					const data = res.data
-					console.log(data)
 					commit('SET_USERID', data.userNumber)
 					commit('SET_USERPHONE', data.userPhone)
 					commit('SET_USERNAME', data.userName)
