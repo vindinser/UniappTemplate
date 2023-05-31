@@ -44,7 +44,8 @@ const request = config => {
 				toast(data.msg)
 				reject(data.msg)
 			}
-		}).catch(({ errMsg: message }) => {
+		}).catch(error => {
+			let { errMsg: message = '' } = error
 			if (message === 'Network Error') {
 				message = '后端接口连接异常'
 			} else if (message.includes('timeout')) {
