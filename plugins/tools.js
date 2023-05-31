@@ -16,7 +16,7 @@ export default {
 	},
 	// 认证提示
 	certificationPrompt: () => {
-		if(!$store.getters.auditStatus) {
+		if($store.getters.auditStatus !== 1) {
 			$modal.confirm(
 				'请填写定损员认证后再进行操作',
 				'定损员认证',
@@ -26,5 +26,11 @@ export default {
 				$tab.to('/pages/assess/authentication/authentication')
 			})
 		}
+	},
+	// 手机号加密（中间四位*）
+	encryptionPhoneNo(phoneNo) {
+		const isLegal = uni.$u.test.mobile(phoneNo)
+		const phoneNoLegaled = isLegal ? phoneNo : '00000000000'
+		return phoneNoLegaled.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2")
 	}
 }
