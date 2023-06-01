@@ -38,8 +38,8 @@
 			list: [
 				{ name: '头像', type: 'img' },
 				{ name: 'ID', textValue: '', vuex_valueKey: 'userId' },
-				{ name: '手机号', textValue: '', vuex_valueKey: 'userPhone', path: '/pages/set/' },
-				{ name: '修改密码', textValue: '', path: '/pages/set/' },
+				{ name: '手机号', textValue: '', vuex_valueKey: 'userPhone', path: 'edit-phone' },
+				{ name: '修改密码', textValue: '', path: 'edit-pwd' },
 				{ name: '真实姓名', textValue: '', vuex_valueKey: 'userName', isAudit: true },
 				{ name: '保险公司', textValue: '', vuex_valueKey: 'insureCompanyName', isAudit: true }
 			]
@@ -79,8 +79,7 @@
 			},
 			// 信息项点击事件
 			itemClick({ path = '' }) {
-				if(path === '') return
-				console.log(path)
+				path !== '' && this.$tab.to(`/pages/set/verify-phone-no/verify-phone-no?nextRouterPath=${ path }`)
 			}
 		}
 	}

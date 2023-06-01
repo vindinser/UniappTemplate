@@ -59,6 +59,16 @@
 				"navigationBarTitleText": "用户基本信息"
 			}
 		}, {
+			"path": "verify-phone-no/verify-phone-no",
+			"style": {
+				"navigationBarTitleText": "验证手机号"
+			}
+		}, {
+			"path": "edit-pwd/edit-pwd",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		}, {
 			"path": "account/account",
 			"style": {
 				"navigationBarTitleText": "账号设置与安全"
