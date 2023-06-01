@@ -63,6 +63,14 @@ export function personalData() {
 	})
 }
 
+// 修改绑定手机号
+export function modifyUserPhone(data) {
+	return request({
+		'url': '/user/modifyUserPhone',
+		data
+	})
+}
+
 // 退出方法
 export function logout() {
 	return request({

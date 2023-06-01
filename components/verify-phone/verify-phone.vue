@@ -16,14 +16,14 @@
 		</u-form>
 		<!-- 操作按钮 -->
 		<view class="u-m-t-80">
-			<u-button text="下一步" type="primary" @click="handleLogin" />
+			<u-button :text="toOrReLaunch === 'reLaunch' ? '确定' : '下一步'" type="primary" @click="handleLogin" />
 		</view>
 	</view>
 </template>
 
 <script>
 	import { getCodeFn } from '@/common/untils/pubilcFn.js'
-	import { determineCode } from '@/api/login.js'
+	import { determineCode, modifyUserPhone } from '@/api/login.js'
 	
 	export default {
 		name:"verify-phone",
@@ -39,7 +39,11 @@
 			phoneNoDisabled: {
 				type: Boolean,
 				default: false
-			} // 手机号是否可输入
+			}, // 手机号是否可输入
+			toOrReLaunch: {
+				type: String,
+				default: 'to'
+			} // to: 验证手机 reLaunch: 修改绑定的手机
 		},
 		data: () => ({
 			loginForm: {
@@ -50,10 +54,12 @@
 				userPhone: [{ required: true, message: '请输入手机号码' } ],
 				code: [{ required: true, message: '请输入验证码' } ]
 			}, // 找回密码表单验证规则
-			tips: ''
+			tips: '',
+			api: determineCode
 		}),
 		mounted() {
 			this.userPhone !== '' && (this.loginForm.userPhone = this.userPhone)
+			this.toOrReLaunch === 'toOrReLaunch' && (this.api = modifyUserPhone)
 		},
 		methods: {
 			// 获取验证码
@@ -64,15 +70,16 @@
 			handleLogin() {
 				if(!this.nextRouterPath) return this.$modal.msg('操作有误请重试！')
 				this.$refs.loginForm.validate().then(res => {
-					determineCode(this.loginForm).then(res => {
+					this.api(this.loginForm).then(res => {
 						const paramUrl = uni.$u.queryParams(this.loginForm)
-						this.$tab.to(`${ this.nextRouterPath }${ paramUrl }`)
+						this.$tab[this.toOrReLaunch](`${ this.nextRouterPath }${ paramUrl }`)
 					}).catch(err => {
 						console.error(err)
-						err === '验证码有误' && (this.loginForm.code = '')
+						if(['验证码有误', '验证码过期'].includes(err)) return
+						this.loginForm.code = ''
 					})
 				})
-			},
+			}
 		}
 	}
 </script>
