@@ -58,19 +58,16 @@
 				{ icon: 'icon-tixing', name: '消息', color: '#1570EF', path: '' }
 			],
 			baseInfoPath: {
-				path: ''
+				path: '/pages/set/personal-info/personal-info'
 			}
 		}),
 		onShow() {
-			if(this.$store.getters.auditStatus !== 1) {
-				console.log('获取定损员信息')
-			}
+			this.$store.getters.auditStatus !== 1 && this.$store.dispatch('GetUserInfo')
 		},
 		methods: {
 			// 点击跳转设置项
 			handleItemClick({ path }) {
-				console.log(path)
-				// this.$tab.to(path)
+				this.$tab.to(path)
 			}
 		}
 	}

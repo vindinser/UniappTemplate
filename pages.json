@@ -54,6 +54,11 @@
 	}, {
 		"root": "pages/set", // 设置相关功能页面
 		"pages": [{
+			"path": "personal-info/personal-info",
+			"style": {
+				"navigationBarTitleText": "用户基本信息"
+			}
+		}, {
 			"path": "account/account",
 			"style": {
 				"navigationBarTitleText": "账号设置与安全"
