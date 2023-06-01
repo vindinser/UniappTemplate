@@ -106,8 +106,10 @@
 				padding: 16px;
 				line-height: 32px;
 				@include custom-flex($align: center, $justify: space-between);
+				@include custom-text($c: #888888);
 				
 				.item-right {
+					color: #434343;
 					@include custom-flex($align: center);
 					
 					&_audit-status {
