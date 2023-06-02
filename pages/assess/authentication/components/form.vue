@@ -15,11 +15,11 @@
 					<u-input v-model="authenticationForm.userName" placeholder="输入真实姓名" />
 				</u-form-item>
 				<u-form-item label="手机号码" required>
-					<u-input v-model="authenticationForm.userPhone" placeholder="默认回显注册手机号" />
+					<u-input v-model="$store.getters.userPhone" placeholder="默认回显注册手机号" disabled />
 				</u-form-item>
 			</u-form>
 			<view class="u-m-t-80">
-				<u-button text="提交认证" type="primary" :loading="loading" @click="submitAuthenc" />
+				<u-button text="提交认证" type="primary" @click="submitAuthenc" />
 				<view class="btn-intr">提交后我司会进行审核，审核通过后可添加中标通知车辆</view>
 			</view>
 		</view>
@@ -27,25 +27,26 @@
 </template>
 
 <script>
+	import { lossAssessmentFillIn } from "@/api/assess.js"
+	
 	export default {
 		data: () => ({
 			authenticationForm: {
 				insureCompanyName: '', // 保险公司
-				userName: '', // 真实姓名
-				userPhone: '' // 注册手机号
+				userName: '' // 真实姓名
 			},
 			rules: {
 				insureCompanyName: [{ required: true, message: '请输入保险公司' }],
 				userName: [{ required: true, message: '请输入真实姓名' }]
 			},
-			loading: false
 		}),
 		methods: {
 			// 提交认证
 			submitAuthenc() {
-				this.$refs.authenticationFormRef.validate().then(res => {
-					// this.loading = true
-					console.log('提交认证')
+				this.$refs.authenticationFormRef.validate().then(async () => {
+					const res = await lossAssessmentFillIn(this.authenticationForm)
+					if(!res.success) return
+					this.$emit('refreshAuditInfo')
 				})
 			}
 		}

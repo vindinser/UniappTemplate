@@ -2,7 +2,7 @@
 <template>
 	<view class="u-sys u-p-32">
 		<view class="audit-info">
-			<view class="audit-info_item" v-for="item, index in auditInfo" :key="index">
+			<view class="audit-info_item" v-for="item, index in list" :key="index">
 				<view class="audit-info_item-name">{{ item.name }}</view>
 				<view class="audit-info_item-value">{{ item.value }}</view>
 			</view>
@@ -13,16 +13,30 @@
 
 <script>
 	export default {
-		data: () => ({
-			auditInfo: [
-				{ name: '保险公司', keyName: '', value: '平安保险有限公司-北京分公司' },
-				{ name: '真实姓名', keyName: '', value: '张三' },
-				{ name: '手机号码', keyName: '', value: '133****1233' },
-				{ name: 'ID编号', keyName: '', value: '121212' },
-			]
-		}),
-		methods: {
-			
+		props: {
+			auditInfo: {
+				type: Object,
+				default: () => {}
+			}
+		},
+		computed: {
+			list() {
+				return (arr => {
+					if(this.auditInfo === {}) {
+						return arr
+					} else {
+						arr.forEach(item => {
+							item.value = this.auditInfo[item.keyName]
+						})
+						return arr
+					}
+				})([
+					{ name: '保险公司', keyName: 'insureCompanyName', value: '' },
+					{ name: '真实姓名', keyName: 'userName', value: '' },
+					{ name: '手机号码', keyName: 'userPhone', value: '' },
+					{ name: 'ID编号', keyName: 'userNumber', value: '' },
+				])
+			}
 		}
 	}
 </script>
