@@ -8,7 +8,11 @@ const lossAssessorInfo = data => request({ url: '/user/lossAssessorInfo' })
 // 定损员认证信息提交
 const lossAssessmentFillIn = data => request({ url: '/verify/lossAssessmentFillIn', data })
 
+// 定损员认证信息修改
+const authenticationInfo = data => request({ url: '/user/authenticationInfo', data })
+
 export {
 	lossAssessorInfo,
-	lossAssessmentFillIn
+	lossAssessmentFillIn,
+	authenticationInfo
 }

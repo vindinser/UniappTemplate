@@ -1,5 +1,5 @@
 <template>
-	<view class="u-sys">
+	<view>
 		<!-- 顶部导航栏 -->
 		<u-navbar title="定损员认证" auto-back />
 		<!-- 无数据 -->

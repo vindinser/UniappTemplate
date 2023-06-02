@@ -1,12 +1,26 @@
 <!-- 审核认证信息 -->
 <template>
-	<view class="u-sys u-p-32">
+	<view class="u-p-32">
+		<!-- 认证信息 -->
 		<view class="audit-info">
 			<view class="audit-info_item" v-for="item, index in list" :key="index">
 				<view class="audit-info_item-name">{{ item.name }}</view>
 				<view class="audit-info_item-value">{{ item.value }}</view>
 			</view>
-			<text class="audit-info_icon iconfont icon-shenhezhong" :style="{ color: $u.config.color[`u-primary`] }" />
+			<text
+				class="audit-info_icon iconfont"
+				:class="computedIcon('class')"
+				:style="computedIcon('style')"
+			/>
+		</view>
+		<!-- 修改认证信息按钮 -->
+		<view class="u-m-t-60" v-if="$store.getters.auditStatus === 1">
+			<u-button text="修改认证信息" type="primary" plain @click="editAuditInfo" />
+		</view>
+		<!-- 认证记录 -->
+		<view class="certification-records" @click="viewAuditRecords">
+			<text class="u-m-r-8">认证记录</text>
+			<u-icon name="arrow-right" color="#909399" size="15px" />
 		</view>
 	</view>
 </template>
@@ -37,6 +51,26 @@
 					{ name: 'ID编号', keyName: 'userNumber', value: '' },
 				])
 			}
+		},
+		methods: {
+			// 修改认证信息
+			editAuditInfo() {
+				this.$tab.to(`/pages/set/verify-phone-no/verify-phone-no?nextRouterPath=edit-audit-info`)
+			},
+			// 动态渲染 icon
+			computedIcon(type) {
+				return ((obj, objKey) => 
+					obj[objKey][type]
+				)({
+					2: { class: 'icon-shenhezhong', style: { color: '#1570EF' } },
+					1: { class: 'icon-yitongguo', style: { color: '#5AC725' } },
+					999: { class: 'icon-weitongguo', style: { color: '#FF5B05' } }
+				}, this.$store.getters.auditStatus)
+			},
+			// 查看认证记录
+			viewAuditRecords() {
+				console.log('查看认证记录')
+			}
 		}
 	}
 </script>
@@ -55,7 +89,7 @@
 			@include custom-flex();
 			
 			&-name {
-				width: 64px;
+				width: 74px;
 			}
 			
 			&-value {}
@@ -68,5 +102,14 @@
 			right: -10px;
 			transform: rotate(-30deg);
 		}
+	}
+	
+	.certification-records {
+		left: 0;
+		right: 0;
+		bottom: 32px;
+		position: absolute;
+		@include custom-flex($align: center, $justify: center);
+		@include custom-text($c: #909399, $s: 12px, $h: 16px, $H: 16px);
 	}
 </style>
