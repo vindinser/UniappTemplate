@@ -32,8 +32,16 @@
 			// 点击了设置项
 			itemClick({ path = '' }) {
 				if(path === 'accountCancellation') {
-					this.$store.dispatch('LogOff').then(() => {
-						this.$tab.reLaunch(`/pages/login/login`)
+					this.$modal.confirm(
+						`您在此平台注册的信息将全部删除
+1、您在此平台注册的信息将全部删除，填写的个人资料信息将永久删除且无法恢复
+2、上传的车辆资料和信息将永久删除且无法恢复
+						`, 
+						'账号注销提示',
+						'取消',
+						'申请注销'
+					).then(() => {
+						this.$store.dispatch('LogOff').then(() => this.$tab.reLaunch(`/pages/login/login`))
 					})
 				} else {
 					console.log(path)

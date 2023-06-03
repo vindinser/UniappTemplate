@@ -75,11 +75,3 @@ export function modifyUserPhone(data) {
 export function accountCancellation() {
 	return request({ url: '/user/accountCancellation' })
 }
-
-// 退出方法
-export function logout() {
-	return request({
-		'url': '/logout',
-		'method': 'post'
-	})
-}

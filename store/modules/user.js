@@ -1,10 +1,20 @@
 import { config } from '@/common/config'
 import storage from '@/common/untils/storageUntil.js'
 import constant from '@/common/untils/constantUntil.js'
-import { login, logout, personalData, accountCancellation } from '@/api/login'
+import { login, personalData, accountCancellation } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/untils/authUntil.js'
 
 const baseUrl = config.baseUrl
+const stateClear = (commit, resolve) => {
+	commit('SET_USERID', '')
+	commit('SET_USERPHONE', '')
+	commit('SET_USERNAME', '')
+	commit('SET_COMPANY', '')
+	commit('SET_AUDITSTATUS', '')
+	removeToken()
+	storage.clean()
+	resolve()
+}
 
 const user = {
 	state: {
@@ -87,6 +97,8 @@ const user = {
 					commit('SET_USERNAME', '')
 					commit('SET_COMPANY', '')
 					commit('SET_AUDITSTATUS', '')
+					removeToken()
+					storage.clean()
 					resolve(res)
 				}).catch(err => {
 					console.error(err)
@@ -97,16 +109,7 @@ const user = {
 		// 退出系统
 		LogOut({ commit, state }) {
 			return new Promise((resolve, reject) => {
-				logout(state.token).then(() => {
-					commit('SET_TOKEN', '')
-					commit('SET_ROLES', [])
-					commit('SET_PERMISSIONS', [])
-					removeToken()
-					storage.clean()
-					resolve()
-				}).catch(error => {
-					reject(error)
-				})
+				stateClear(commit, resolve)
 			})
 		}
 	}
