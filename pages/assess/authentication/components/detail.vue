@@ -7,14 +7,21 @@
 				<view class="audit-info_item-name">{{ item.name }}</view>
 				<view class="audit-info_item-value">{{ item.value }}</view>
 			</view>
+			<!-- #ifndef MP-WEIXIN -->
 			<text
 				class="audit-info_icon iconfont"
 				:class="computedIcon('class')"
 				:style="computedIcon('style')"
 			/>
+			<!-- #endif -->
+			<!-- #ifdef  MP-WEIXIN -->
+			<text v-if="auditInfo.lossAdjusterCertification === 2" class="audit-info_icon iconfont icon-shenhezhong" style="color: #1570EF;" />
+			<text v-else-if="auditInfo.lossAdjusterCertification === 1" class="audit-info_icon iconfont icon-yitongguo" style="color: #5AC725;" />
+			<text v-else-if="auditInfo.lossAdjusterCertification === 999" class="audit-info_icon iconfont icon-weitongguo" style="color: #FF5B05;" />
+			<!-- #endif --> 
 		</view>
 		<!-- 修改认证信息按钮 -->
-		<view class="u-m-t-60" v-if="$store.getters.auditStatus === 1">
+		<view class="u-m-t-60" v-if="auditInfo.lossAdjusterCertification === 1">
 			<u-button text="修改认证信息" type="primary" plain @click="editAuditInfo" />
 		</view>
 		<!-- 认证记录 -->
@@ -31,6 +38,10 @@
 			auditInfo: {
 				type: Object,
 				default: () => {}
+			},
+			auditStatus: {
+				type: Number,
+				default: 0
 			}
 		},
 		computed: {
@@ -65,7 +76,7 @@
 					2: { class: 'icon-shenhezhong', style: { color: '#1570EF' } },
 					1: { class: 'icon-yitongguo', style: { color: '#5AC725' } },
 					999: { class: 'icon-weitongguo', style: { color: '#FF5B05' } }
-				}, this.$store.getters.auditStatus)
+				}, this.auditInfo.lossAdjusterCertification)
 			},
 			// 查看认证记录
 			viewAuditRecords() {
