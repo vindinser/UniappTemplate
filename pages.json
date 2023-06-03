@@ -50,6 +50,11 @@
 			"style": {
 				"navigationBarTitleText": "定损员认证"
 			}
+		}, {
+			"path": "certification-records/certification-records",
+			"style": {
+				"navigationBarTitleText": "定损员认证记录"
+			}
 		}]
 	}, {
 		"root": "pages/set", // 设置相关功能页面

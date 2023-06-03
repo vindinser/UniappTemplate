@@ -11,8 +11,12 @@ const lossAssessmentFillIn = data => request({ url: '/verify/lossAssessmentFillI
 // 定损员认证信息修改
 const authenticationInfo = data => request({ url: '/user/authenticationInfo', data })
 
+// 获取定损员认证记录
+const certificationApproval = data => request({ url: '/user/certificationApproval' })
+
 export {
 	lossAssessorInfo,
 	lossAssessmentFillIn,
-	authenticationInfo
+	authenticationInfo,
+	certificationApproval
 }

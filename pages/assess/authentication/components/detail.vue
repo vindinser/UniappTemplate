@@ -2,24 +2,7 @@
 <template>
 	<view class="u-p-32">
 		<!-- 认证信息 -->
-		<view class="audit-info">
-			<view class="audit-info_item" v-for="item, index in list" :key="index">
-				<view class="audit-info_item-name">{{ item.name }}</view>
-				<view class="audit-info_item-value">{{ item.value }}</view>
-			</view>
-			<!-- #ifndef MP-WEIXIN -->
-			<text
-				class="audit-info_icon iconfont"
-				:class="computedIcon('class')"
-				:style="computedIcon('style')"
-			/>
-			<!-- #endif -->
-			<!-- #ifdef  MP-WEIXIN -->
-			<text v-if="auditInfo.lossAdjusterCertification === 2" class="audit-info_icon iconfont icon-shenhezhong" style="color: #1570EF;" />
-			<text v-else-if="auditInfo.lossAdjusterCertification === 1" class="audit-info_icon iconfont icon-yitongguo" style="color: #5AC725;" />
-			<text v-else-if="auditInfo.lossAdjusterCertification === 999" class="audit-info_icon iconfont icon-weitongguo" style="color: #FF5B05;" />
-			<!-- #endif --> 
-		</view>
+		<certification-item :list="list" />
 		<!-- 修改认证信息按钮 -->
 		<view class="u-m-t-60" v-if="auditInfo.lossAdjusterCertification === 1">
 			<u-button text="修改认证信息" type="primary" plain @click="editAuditInfo" />
@@ -33,34 +16,31 @@
 </template>
 
 <script>
+	import CertificationItem from './certification-item.vue'
+	
 	export default {
+		components: {
+			CertificationItem
+		},
 		props: {
 			auditInfo: {
 				type: Object,
 				default: () => {}
-			},
-			auditStatus: {
-				type: Number,
-				default: 0
 			}
 		},
 		computed: {
 			list() {
-				return (arr => {
-					if(this.auditInfo === {}) {
-						return arr
-					} else {
-						arr.forEach(item => {
-							item.value = this.auditInfo[item.keyName]
-						})
-						return arr
-					}
+				return ((list, assessorApprovalStatus = 0) => {
+					this.auditInfo !== {} && list.forEach(item => {
+						item.value = this.auditInfo[item.keyName]
+					})
+					return [{ list, assessorApprovalStatus }]
 				})([
 					{ name: '保险公司', keyName: 'insureCompanyName', value: '' },
 					{ name: '真实姓名', keyName: 'userName', value: '' },
 					{ name: '手机号码', keyName: 'userPhone', value: '' },
 					{ name: 'ID编号', keyName: 'userNumber', value: '' },
-				])
+				], this.auditInfo.lossAdjusterCertification)
 			}
 		},
 		methods: {
@@ -68,19 +48,9 @@
 			editAuditInfo() {
 				this.$tab.to(`/pages/set/verify-phone-no/verify-phone-no?nextRouterPath=edit-audit-info`)
 			},
-			// 动态渲染 icon
-			computedIcon(type) {
-				return ((obj, objKey) => 
-					obj[objKey][type]
-				)({
-					2: { class: 'icon-shenhezhong', style: { color: '#1570EF' } },
-					1: { class: 'icon-yitongguo', style: { color: '#5AC725' } },
-					999: { class: 'icon-weitongguo', style: { color: '#FF5B05' } }
-				}, this.auditInfo.lossAdjusterCertification)
-			},
 			// 查看认证记录
 			viewAuditRecords() {
-				console.log('查看认证记录')
+				this.$tab.to('/pages/assess/certification-records/certification-records')
 			}
 		}
 	}
