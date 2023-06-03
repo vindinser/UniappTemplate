@@ -20,7 +20,7 @@
 			agreementlist: [],
 			setList: [{
 				title: '账号注销',
-				path: 'pages/componentsC/write-off/write-off'
+				path: 'accountCancellation'
 			}]
 		}),
 		computed: {
@@ -30,8 +30,14 @@
 		},
 		methods: {
 			// 点击了设置项
-			itemClick(item) {
-				console.log(item)
+			itemClick({ path = '' }) {
+				if(path === 'accountCancellation') {
+					this.$store.dispatch('LogOff').then(() => {
+						this.$tab.reLaunch(`/pages/login/login`)
+					})
+				} else {
+					console.log(path)
+				}
 			}
 		}
 	}

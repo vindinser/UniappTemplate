@@ -1,7 +1,7 @@
 import { config } from '@/common/config'
 import storage from '@/common/untils/storageUntil.js'
 import constant from '@/common/untils/constantUntil.js'
-import { login, logout, personalData } from '@/api/login'
+import { login, logout, personalData, accountCancellation } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/untils/authUntil.js'
 
 const baseUrl = config.baseUrl
@@ -74,6 +74,22 @@ const user = {
 					resolve(res)
 				}).catch(error => {
 					reject(error)
+				})
+			})
+		},
+		
+		// 注销账号
+		LogOff({ commit, state }) {
+			return new Promise((resolve, reject) => {
+				accountCancellation().then(res => {
+					commit('SET_USERID', '')
+					commit('SET_USERPHONE', '')
+					commit('SET_USERNAME', '')
+					commit('SET_COMPANY', '')
+					commit('SET_AUDITSTATUS', '')
+					resolve(res)
+				}).catch(err => {
+					console.error(err)
 				})
 			})
 		},

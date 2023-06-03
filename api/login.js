@@ -71,6 +71,11 @@ export function modifyUserPhone(data) {
 	})
 }
 
+// 注销
+export function accountCancellation() {
+	return request({ url: '/user/accountCancellation' })
+}
+
 // 退出方法
 export function logout() {
 	return request({
