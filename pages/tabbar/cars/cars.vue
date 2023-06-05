@@ -8,7 +8,7 @@
 			<view class="u-p-l-32 u-p-r-32">
 				<u-search v-model="formSearch.keyword" shape="round" actionText="搜索" animation clearable />
 			</view>
-			<u-tabs :list="tabsList" />
+			<u-tabs :list="tabsList" @click="tabsClick" />
 		</u-sticky>
 		<!-- 列表 -->
 		<view v-for="item in tableData.list" :key="item.auctionNumber">
@@ -50,6 +50,7 @@
 			emptyString: '',
 			formSearch: {
 				keyword: '',
+				status: 2,
 				pageNo: 1,
 				pageSize: '10'
 			},
@@ -97,11 +98,16 @@
 			this.$store.getters.auditStatus === 1 && this.handleLoadmore()
 		},
 		methods: {
+			// tabs 点击事件
+			tabsClick({ value }) {
+				this.formSearch.status = value
+				this.handRefresh()
+			},
 			// 获取全部车辆数据
 			getListData() {
 				biddingCarList({
 					"keyword": this.formSearch.keyword, // 关键字
-					"status": 2, // 状态码  0待接收   1已接收   2全部
+					"status": this.formSearch.status, // 状态码  0待接收   1已接收   2全部
 					"pageNo": String(this.formSearch.pageNo), // 第X页
 					"pageSize": this.formSearch.pageSize // 当页条数
 				}).then(res => {
