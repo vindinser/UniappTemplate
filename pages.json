@@ -28,7 +28,8 @@
 		}, {
 			"path": "pages/tabbar/cars/cars",
 			"style": {
-				"navigationBarTitleText": "全部车辆"
+				"navigationBarTitleText": "全部车辆",
+				"enablePullDownRefresh": true
 			}
 		}, {
 			"path": "pages/tabbar/my/my",
