@@ -56,6 +56,11 @@
 			"style": {
 				"navigationBarTitleText": "定损员认证记录"
 			}
+		}, {
+			"path": "add-car/add-car",
+			"style": {
+				"navigationBarTitleText": "添加中标通知车辆"
+			}
 		}]
 	}, {
 		"root": "pages/set", // 设置相关功能页面

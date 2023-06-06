@@ -54,7 +54,8 @@
 			},
 			// 添加中标通知车辆按钮点击事件
 			addCar() {
-				console.log('addCar')
+				// if(this.$store.getters.auditStatus !== 1) return this.$tools.certificationPrompt()
+				this.$tab.to('/pages/assess/add-car/add-car')
 			}
 		}
 	}
