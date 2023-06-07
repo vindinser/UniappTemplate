@@ -95,6 +95,13 @@
 	opacity: 0.7;
 }
 
+// 定义flex等分
+@for $i from 0 through 12 {
+	.u-flex-#{$i} {
+		flex: $i;
+	}
+}
+
 // 定义字体(px)单位，小于20都为px单位字体
 @for $i from 9 to 20 {
 	.u-font-#{$i} {
