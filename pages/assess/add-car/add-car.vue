@@ -28,11 +28,10 @@
 					<u--textarea v-model="model.remark" placeholder="请输入备注" count />
 				</u-form-item>
 				<u-form-item label="图片信息" labelPosition="top" :borderBottom="false" prop="imageUrl" required>
-					<!-- <u--input v-model="model.imageUrl" placeholder="请输入拍卖编号" /> -->
-					图片
+					<upload-files ref="checkInventoryCarImageRef" :imgStr.sync="model.imageUrl" />
 				</u-form-item>
 			</u--form>
-			<view class="u-m-t-56">
+			<view class="u-m-t-48">
 				<u-button type="primary" @click="submit">确认提交</u-button>
 			</view>
 		</view>
@@ -82,7 +81,7 @@
 		methods: {
 			// 确认提交按钮点击事件
 			submit() {
-				console.log(this.model.selectAreaCode, this.model.detailedAddress)
+				console.log(this.model.selectAreaCode, this.model.detailedAddress, this.model.imageUrl)
 				this.$refs.uForm.validate().then(res => {
 					uni.$u.toast('校验通过')
 				})
