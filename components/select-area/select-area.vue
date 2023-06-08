@@ -95,7 +95,10 @@
 					let selectPlaceName = ''
 					for(let k in this.value) {
 						selectPlaceName += `${ selectPlaceName === '' ? '' : ' ' } ${ this.value[k].name }`
-						this.value[k].code !== '' && this.getSwiperItemList(this.level.indexOf(k) + 1, this.value[k].code)
+						const levelIndex = this.level.indexOf(k) + 1
+						if(this.value[k].code !== '' && levelIndex < 3) {
+							this.getSwiperItemList(levelIndex, this.value[k].code)
+						}
 					}
 					selectPlaceName = uni.$u.trim(selectPlaceName)
 					return selectPlaceName
