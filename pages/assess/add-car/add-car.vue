@@ -22,7 +22,7 @@
 					<select-area :value.sync="model.selectAreaCode" placeholder="请选择车辆停放地" />
 				</u-form-item>
 				<u-form-item label="详细地址" prop="detailedAddress" required>
-					<u--input v-model="model.detailedAddress" placeholder="请输入详细地址" />
+					<address-recognition :value.sync="model.detailedAddress" :resolveAddress.sync="model.selectAreaCode" placeholder="请输入详细地址" />
 				</u-form-item>
 				<u-form-item :label="emptyString">
 					<u--textarea v-model="model.remark" placeholder="请输入备注" count />
@@ -48,9 +48,18 @@
 				ownerName: '', // 车主姓名
 				ownerPhone: '', // 车主手机号
 				selectAreaCode: {
-					provinceCode: '', // 选择的省
-					cityCode: '', // 选择的市
-					areaCode: '', // 选择的县
+					province: {
+						code: '',
+						name: ''
+					}, // 省
+					city: {
+						code: '',
+						name: ''
+					}, // 市
+					area: {
+						code: '',
+						name: ''
+					}, // 县
 				}, // 选择的省市县
 				detailedAddress: '', // 详细地址
 				imageUrl: '', // 图片
@@ -73,7 +82,7 @@
 		methods: {
 			// 确认提交按钮点击事件
 			submit() {
-				console.log(this.model.selectAreaCode)
+				console.log(this.model.selectAreaCode, this.model.detailedAddress)
 				this.$refs.uForm.validate().then(res => {
 					uni.$u.toast('校验通过')
 				})

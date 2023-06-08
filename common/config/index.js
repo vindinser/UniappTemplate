@@ -130,6 +130,7 @@ module.exports = {
 			
 		},
 		input: {
+			clearable: true,
 			border: 'none',
 			disabledColor: '#ffffff'
 		},

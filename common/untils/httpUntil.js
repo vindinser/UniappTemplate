@@ -1,14 +1,13 @@
 import store from '@/store'
-import { config } from '@/common/config'
+import { config as configJs } from '@/common/config'
 import { getToken } from '@/common/untils/authUntil.js'
 import errorCode from '@/common/untils/errorCode.js'
 import { toast, tansParams, loading } from '@/common/untils/commonUntil.js'
 
 let timeout = 10000
-let baseUrl = config.baseUrl
 
 const request = config => {
-	baseUrl = config.baseUrl ? config.baseUrl : baseUrl
+	const baseUrl = config.baseUrl ? config.baseUrl : configJs.baseUrl
 	// 是否需要设置 token
 	const isToken = (config.headers || {}).isToken === false
 	config.header = config.header || {}
@@ -38,7 +37,7 @@ const request = config => {
 				reject('网络异常')
 				return
 			}
-			if(data.success) {
+			if(data.success || data.constructor === Array) {
 				resolve(data)
 			} else {
 				toast(data.msg)

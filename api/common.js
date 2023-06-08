@@ -34,5 +34,6 @@ const SfSmartAddress = address => request({
 export {
 	hzdfProvince,
 	hzdfCity,
-	hzdfArea
+	hzdfArea,
+	SfSmartAddress
 }

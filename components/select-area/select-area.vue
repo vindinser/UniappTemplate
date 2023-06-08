@@ -70,26 +70,13 @@
 			provinceList: [], // 省
 			cityList: [], // 市
 			areaList: [], // 县
-			selectItem: {
-				province: {
-					code: '',
-					name: ''
-				}, // 选择的省
-				city: {
-					code: '',
-					name: ''
-				}, // 选择的市
-				area: {
-					code: '',
-					name: ''
-				}, // 选择的县
-			},
+			selectItem: {},
 			level: ['province', 'city', 'area'],
 			apiArr: [hzdfProvince, hzdfCity, hzdfArea],
-			keyword: '',
-			selectPlaceName: ''
+			keyword: ''
 		}),
 		computed: {
+			// 省市县
 			swiperList() {
 				return ((a, b, c) => {
 					if(c.length !== 0) {
@@ -100,6 +87,22 @@
 						return [a]
 					}
 				})(this.provinceList, this.cityList, this.areaList)
+			},
+			// 选择的省市县
+			selectPlaceName: {
+				get() {
+					this.selectItem = uni.$u.deepClone(this.value)
+					let selectPlaceName = ''
+					for(let k in this.value) {
+						selectPlaceName += `${ selectPlaceName === '' ? '' : ' ' } ${ this.value[k].name }`
+						this.value[k].code !== '' && this.getSwiperItemList(this.level.indexOf(k) + 1, this.value[k].code)
+					}
+					selectPlaceName = uni.$u.trim(selectPlaceName)
+					return selectPlaceName
+				},
+				set(newVal) {
+					return newVal
+				}
 			}
 		},
 		mounted() {
@@ -141,14 +144,11 @@
 			},
 			// 搜索事件
 			handleSearch() {
-				console.log(this.swiperList, this.swiperList.length)
 				this.handelSearchList(this.provinceList)
 				if(this.swiperList.length < 2) return
-				console.log('city')
 				const cityArr = this.handelSearchList(this.cityList)
 				cityArr.length > 0 && this.handelSearchList(this.provinceList, cityArr)
 				if(this.swiperList.length < 3) return
-				console.log('area')
 				const areaArr = this.handelSearchList(this.areaList)
 				if(areaArr.length < 0) return
 				const proviceArr = this.handelSearchList(this.cityList, areaArr)
@@ -172,9 +172,6 @@
 			},
 			// 确定按钮点击事件
 			confirm() {
-				for(let k in this.selectItem) {
-					this.selectPlaceName = `${ this.selectPlaceName }${ this.selectPlaceName === '' ? '' : ' ' } ${ this.selectItem[k].name }`
-				}
 				this.$emit('update:value', this.selectItem)
 				this.show = false
 			}
