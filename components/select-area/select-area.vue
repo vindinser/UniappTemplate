@@ -8,7 +8,9 @@
 			<view class="popup-head">
 				<view class="popup-head__title">
 					<text>{{ placeholder }}</text>
-					<u-icon class="popup-head__title-icon" name="close" @click="show = false" />
+					<view class="popup-head__title-icon">
+						<u-icon name="close" @click="show = false" />
+					</view>
 				</view>
 				<!-- 搜索 -->
 				<u-search v-model="keyword" shape="square" actionText="搜索" animation @search="handleSearch" @clear="handleSearch" @custom="handleSearch" />
