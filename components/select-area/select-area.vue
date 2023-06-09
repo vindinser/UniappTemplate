@@ -23,12 +23,13 @@
 					<swiper-item v-for="(item1, index1) in swiperList" :key="index1">
 					    <scroll-view scroll-y class="list-box u-border-top">
 					        <view class="list-box_item u-border-bottom" v-for="item in item1" :key="item.code" @click="swiperItemChange(item, index1)" v-show="item.show">
-					            <u-icon
-									v-if="isSelect(item, index1)"
-									name="checkmark"
-									class="u-m-r-10 u-primary"
-									color="`${ $u.config.color[`u-primary`] }`"
-								/>
+					            <view class="u-m-r-10 u-primary">
+									<u-icon
+										v-if="isSelect(item, index1)"
+										name="checkmark"
+										color="`${ $u.config.color[`u-primary`] }`"
+									/>
+					            </view>
 					            <view
 									class="u-flex-1 u-line-1 u-font-xs"
 									:class="{ 'u-primary font-weight-bold': isSelect(item, index1) }"

@@ -50,7 +50,7 @@
 			emptyString: '',
 			formSearch: {
 				keyword: '',
-				status: 2,
+				status: 0,
 				pageNo: 1,
 				pageSize: '10'
 			},
@@ -107,7 +107,7 @@
 			getListData() {
 				biddingCarList({
 					"keyword": this.formSearch.keyword, // 关键字
-					"status": this.formSearch.status, // 状态码  0待接收   1已接收   2全部
+					"status": Number(this.formSearch.status), // 状态码  0待接收   1已接收   2全部
 					"pageNo": String(this.formSearch.pageNo), // 第X页
 					"pageSize": this.formSearch.pageSize // 当页条数
 				}).then(res => {
