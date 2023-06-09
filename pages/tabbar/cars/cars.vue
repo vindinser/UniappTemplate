@@ -114,7 +114,7 @@
 					console.log(res)
 					if(!res.success) return this.handleData()
 					this.handleData({
-						ListData: resListData || [],
+						ListData: res.ListData || [],
 						count: res.data.count || 0
 					})
 				}).catch(err => {

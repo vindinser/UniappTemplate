@@ -109,7 +109,12 @@
 						},
 						url: this.$u.config.newUpload,
 						filePath: url,
+						// #ifdef MP-WEIXIN
+						name: 'uploadFiles',
+						// #endif
+						// #ifndef MP-WEIXIN
 						name: url,
+						// #endif
 						success: res => {
 							console.log(JSON.parse(res.data))
 							resolve(JSON.parse(res.data))
