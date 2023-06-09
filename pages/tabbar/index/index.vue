@@ -44,6 +44,11 @@
 			],
 			stepList: ['填写车辆相关信息', '华正线上下线同步车辆接收状态']
 		}),
+		onLoad() {
+			// #ifdef MP-WEIXIN
+			this.$store.dispatch('GetWxAgent')
+			// #endif
+		},
 		onShow() {
 			this.$tools.certificationPrompt()
 		},
@@ -54,7 +59,7 @@
 			},
 			// 添加中标通知车辆按钮点击事件
 			addCar() {
-				// if(this.$store.getters.auditStatus !== 1) return this.$tools.certificationPrompt()
+				if(this.$store.getters.auditStatus !== 1) return this.$tools.certificationPrompt()
 				this.$tab.to('/pages/assess/add-car/add-car')
 			}
 		}

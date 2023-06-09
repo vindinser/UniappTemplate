@@ -39,6 +39,8 @@
 </template>
 
 <script>
+	import { biddingCarAdd } from "@/api/assess.js"
+	
 	export default {
 		data: () => ({
 			model: {
@@ -81,9 +83,21 @@
 		methods: {
 			// 确认提交按钮点击事件
 			submit() {
-				console.log(this.model.selectAreaCode, this.model.detailedAddress, this.model.imageUrl)
-				this.$refs.uForm.validate().then(res => {
-					uni.$u.toast('校验通过')
+				console.log(this.model)
+				this.$refs.uForm.validate().then(async () => {
+					const res = await biddingCarAdd({
+						auctionNumber: this.model.auctionNumber, // 拍卖编号
+						basicPlateNo: this.model.basicPlateNo, // 车牌号
+						ownerName: this.model.ownerName, // 车主姓名
+						ownerPhone: this.model.ownerPhone, // 车主手机号
+						detailedAddress: this.model.detailedAddress, // 详细地址
+						provinceCode: this.model.selectAreaCode.province.code, // 省Code
+						cityCode: this.model.selectAreaCode.city.code, // 市Code
+						areaCode: this.model.selectAreaCode.area.code, // 区code
+						remark: this.model.remark, // 备注
+						imageUrl: this.model.imageUrl // 图片
+					})
+					res.success && this.$tab.back()
 				})
 			}
 		},
