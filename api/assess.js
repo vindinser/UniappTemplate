@@ -17,10 +17,14 @@ const certificationApproval = data => request({ url: '/user/certificationApprova
 // 获取全部车辆列表
 const biddingCarList = data => request({ url: '/bidding/car/biddingCarList', data })
 
+// 添加中标通知车辆
+const biddingCarAdd = data => request({ url: '/bidding/car/biddingCarAdd', data })
+
 export {
 	lossAssessorInfo,
 	lossAssessmentFillIn,
 	authenticationInfo,
 	certificationApproval,
-	biddingCarList
+	biddingCarList,
+	biddingCarAdd
 }

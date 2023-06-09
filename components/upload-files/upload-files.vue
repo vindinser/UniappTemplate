@@ -26,7 +26,7 @@
 			}, // 回显的图片 url
 			picType: {
 				type: String,
-				default: 'pic_safe_venue'
+				default: 'pic_home'
 			}, // 接口中所需参数
 			maxCount: {
 				type: Number,
@@ -93,21 +93,25 @@
 				return new Promise((resolve, reject) => {
 					uni.uploadFile({
 						header: {
-							// #ifdef APP-PLUS || MP-WEIXIN
+							// #ifdef APP-PLUS
 							'User-Agent': this.setUserAgent(),
 							// #endif
-							// #ifdef APP-PLUS || H5 || MP-WEIXIN
-							'File-Sign': this.setFileSing(),
+							// #ifdef MP-WEIXIN
+							'Pic-Type': this.picType,
+							'Content-Type': "multipart/form-data",
 							// #endif
-							token: '',
+							'File-Sign': this.setFileSing()
+						},
+						formData: {
+							// #ifndef MP-WEIXIN
+							filePath: this.picType,
+							// #endif
 						},
 						url: this.$u.config.newUpload,
 						filePath: url,
 						name: url,
-						formData: {
-							filePath: this.picType
-						},
 						success: res => {
+							console.log(JSON.parse(res.data))
 							resolve(JSON.parse(res.data))
 						},
 						fail: err => {
@@ -121,6 +125,9 @@
 				// #ifdef APP-PLUS
 				return plus.navigator.getUserAgent().replace(' uni-app Html5Plus/1.0', '')
 				// #endif
+				// #ifdef MP-WEIXIN
+				return this.$store.getters.wxAgent
+				// #endif
 				// #ifdef H5
 				return window.navigator.userAgent
 				// #endif
@@ -132,7 +139,6 @@
 			},
 			// 处理图片格式，并向外传递
 			handleSendImg() {
-				console.log(this.fileListSend)
 				const imgStr = this.fileListSend.reduce((pre, { url }) => `${ pre }${ pre === '' ? '' : ',' }${ url }`, '')
 				this.$emit('update:imgStr', imgStr)
 				

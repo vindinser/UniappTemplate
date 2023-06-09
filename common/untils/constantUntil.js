@@ -4,6 +4,7 @@ const constant = {
 	userName: 'vuex_userName',
 	insureCompanyName: 'vuex_insureCompanyName',
 	auditStatus: 'vuex_auditStatus',
+	wxAgent: 'vuex_wxAgent'
 }
 
 export default constant

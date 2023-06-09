@@ -9,7 +9,8 @@ let storageNodeKeys = [
 	constant.userPhone,
 	constant.userName,
 	constant.insureCompanyName,
-	constant.auditStatus
+	constant.auditStatus,
+	constant.wxAgent
 ]
 
 // 存储的数据

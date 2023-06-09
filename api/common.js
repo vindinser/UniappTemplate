@@ -3,6 +3,8 @@ import { config } from '@/common/config'
 
 // 公用接口
 
+const baseUrl = config.erpUrl
+
 // 获取下拉列表 —— 省
 const hzdfProvince = () => request({
 	url: '/SecurityActual/hzdfProvince',
@@ -31,9 +33,17 @@ const SfSmartAddress = address => request({
 	baseUrl: config.erpUrl
 })
 
+// 微信小程序获取本机IP
+const getMyIp = () => request({
+	url: '/ip/getMyIp',
+	data: {},
+	baseUrl: config.wxUrl
+})
+
 export {
 	hzdfProvince,
 	hzdfCity,
 	hzdfArea,
-	SfSmartAddress
+	SfSmartAddress,
+	getMyIp
 }

@@ -10,12 +10,18 @@ module.exports = {
 		erpUrl: 'http://192.168.7.132:8003',
 		
 		// 测试
-		newUpload: 'http://27.128.238.14:8007/files/fileSubmit', // 图片上传（路径）
+		// newUpload: 'http://27.128.238.14:8007/files/fileSubmit', // 图片上传（路径）
 		thumbnail_1080: 'http://27.128.238.14:8001/pic_thumbnail_1080', // 1080图片查看（路径拼接）
 		
 		// 正式
-		// newUpload: 'http://erp.hzdfpm.com:9097/files/fileSubmit',
+		// #ifndef MP-WEIXIN
+		newUpload: 'http://erp.hzdfpm.com:9097/files/fileSubmit',
+		// #endif
+		// #ifdef MP-WEIXIN
+		newUpload: 'https://uploadfile.hzdfpm.com/files/fileUpload', // 微信小程序图片上传
+		// #endif
 		// thumbnail_1080: 'http://erp.hzdfpm.com:8001/pic_thumbnail_1080',
+		wxUrl: 'https://request.hzdfpm.com', // 微信小程序
 		
 		tabbar: [ ...tabbar ],
 	},

@@ -3,6 +3,7 @@ import storage from '@/common/untils/storageUntil.js'
 import constant from '@/common/untils/constantUntil.js'
 import { login, personalData, accountCancellation } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/common/untils/authUntil.js'
+import { getMyIp } from "@/api/common.js"
 
 const baseUrl = config.baseUrl
 const stateClear = (commit, resolve) => {
@@ -23,7 +24,8 @@ const user = {
 		userPhone: storage.get(constant.userPhone),
 		userName: storage.get(constant.userName),
 		insureCompanyName: storage.get(constant.insureCompanyName),
-		auditStatus: storage.get(constant.auditStatus)
+		auditStatus: storage.get(constant.auditStatus),
+		wxAgent: storage.get(constant.wxAgent)
 	},
 
 	mutations: {
@@ -50,6 +52,10 @@ const user = {
 			state.auditStatus = auditStatus
 			storage.set(constant.auditStatus, auditStatus)
 		},
+		SET_WXAGENT: (state, wxAgent) => {
+			state.wxAgent = wxAgent
+			storage.set(constant.wxAgent, wxAgent)
+		}
 	},
 
 	actions: {
@@ -102,6 +108,7 @@ const user = {
 					resolve(res)
 				}).catch(err => {
 					console.error(err)
+					reject(err)
 				})
 			})
 		},
@@ -110,6 +117,18 @@ const user = {
 		LogOut({ commit, state }) {
 			return new Promise((resolve, reject) => {
 				stateClear(commit, resolve)
+			})
+		},
+		
+		// 获取微信小程序IP
+		GetWxAgent({ commit, state }) {
+			new Promise(() => {
+				getMyIp().then(res => {
+					console.log(res)
+					res.success && commit('SET_WXAGENT', res.data.userAgent)
+				}).catch(err => {
+					console.error(err)
+				})
 			})
 		}
 	}
