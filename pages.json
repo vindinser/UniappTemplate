@@ -61,6 +61,11 @@
 			"style": {
 				"navigationBarTitleText": "添加中标通知车辆"
 			}
+		}, {
+			"path": "car-detail/car-detail",
+			"style": {
+				"navigationBarTitleText": "车辆详情"
+			}
 		}]
 	}, {
 		"root": "pages/set", // 设置相关功能页面

@@ -11,25 +11,8 @@
 			<u-tabs :list="tabsList" @click="tabsClick" />
 		</u-sticky>
 		<!-- 列表 -->
-		<view v-for="item in tableData.list" :key="item.auctionNumber">
-			<!-- 间隔槽 -->
-			<u-gap height="8" bgColor="#f3f4f6" />
-			<view class="cars-item">
-				<view class="cars-item_header">
-					<text class="iconfont icon-chepaihao" style="color: #1570EF;" />
-					<text class="u-m-l-24">{{ item.basicPlateNo }}</text>
-					<view class="cars-item_header-status" :style="{color: item.status === '已提交' ? '#1570EF' : ''}">
-						<text>{{ item.status }}</text>
-						<u-icon name="arrow-right" />
-					</view>
-				</view>
-				<view class="cars-item_body">
-					<view class="cars-item_body-item" v-for="items, index in listItemObjKey" :key="index">
-						<view class="item-name">{{ items.name }}</view>
-						<view class="item-value">{{ item[items.valueKey] || '-' }}</view>
-					</view>
-				</view>
-			</view>
+		<view v-for="item in tableData.list" :key="item.auctionNumber" @click="carItemClick(item)">
+			<car-item :item="item" />
 		</view>
 		<!-- 间隔槽 -->
 		<u-gap height="8" bgColor="#f3f4f6" />
@@ -44,8 +27,12 @@
 
 <script>
 	import { biddingCarList } from "@/api/assess.js"
+	import CarItem from "./components/car-item.vue"
 	
 	export default {
+		components: {
+			CarItem
+		},
 		data: () => ({
 			emptyString: '',
 			formSearch: {
@@ -63,14 +50,6 @@
 				list: [],
 				total: 0
 			},
-			listItemObjKey: [
-				{ name: '拍卖编号', valueKey: 'auctionNumber' },
-				{ name: '车主姓名', valueKey: 'userName' },
-				{ name: '车主手机号', valueKey: 'userPhone' },
-				{ name: '车辆停放地', valueKey: 'area' },
-				{ name: '备注', valueKey: 'remark' },
-				{ name: '创建时间', valueKey: 'createTime' },
-			],
 			loadStatus: 'loadmore', // 上拉加载 (loadmore, loading, nomore)
 			isRefresh: false, // 下拉刷新
 		}),
@@ -111,7 +90,6 @@
 					"pageNo": String(this.formSearch.pageNo), // 第X页
 					"pageSize": this.formSearch.pageSize // 当页条数
 				}).then(res => {
-					console.log(res)
 					if(!res.success) return this.handleData()
 					this.handleData({
 						ListData: res.ListData || [],
@@ -124,14 +102,6 @@
 			},
 			// 处理返回数据
 			handleData(data) {
-				// "area": "北京市-北京市-大兴区", // 车辆停放地
-				// "auctionNumber": "bbp123138691212979", // 拍卖编号
-				// "createTime": "2023-05-30 15:24:41", // 创建时间
-				// "userPhone": "18032608755", // 车主手机号
-				// "remark": "这是一条备注信息", // 备注信息
-				// "userName": "张明辉2", // 车主姓名
-				// "basicPlateNo": "京B88888", // 车牌号
-				// "status": "已提交" // 状态
 				if(data?.ListData && data?.count) { // 接口获取成功
 					this.tableData.list = [...this.tableData.list, ...data.ListData]
 					this.tableData.total = parseInt(data.count)
@@ -161,42 +131,14 @@
 				this.tableData.list = []
 				this.getListData()
 			},
+			// 点击进入详情
+			carItemClick({ auctionNumber = '' }) {
+				this.$tab.to(`/pages/assess/car-detail/car-detail?auctionNumber=${ auctionNumber }`)
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.cars-item {
-		padding: 16px;
-		
-		&_header {
-			padding: 8px 0;
-			border-bottom: 1px solid #F3F4F6;
-			@include custom-flex($align: center);
-			
-			&-status {
-				margin-left: auto;
-				@include custom-flex($align: center);
-			}
-		}
-		
-		&_body {
-			padding: 8px 0;
-			
-			&-item {
-				padding: 8px 0;
-				font-feature-settings: 'case' on;
-				@include custom-flex($align: flex-start);
-				@include custom-text($c: #909193, $H: 20px, $ls: -0.24px);
-				
-				.item-name {
-					width: 100px;
-				}
-				
-				.item-value {
-					flex: 1;
-				}
-			}
-		}
-	}
+	
 </style>

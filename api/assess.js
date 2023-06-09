@@ -20,11 +20,15 @@ const biddingCarList = data => request({ url: '/bidding/car/biddingCarList', dat
 // 添加中标通知车辆
 const biddingCarAdd = data => request({ url: '/bidding/car/biddingCarAdd', data })
 
+// 中标通知车辆详情
+const biddingCarDetails = data => request({ url: '/bidding/car/biddingCarDetails', data })
+
 export {
 	lossAssessorInfo,
 	lossAssessmentFillIn,
 	authenticationInfo,
 	certificationApproval,
 	biddingCarList,
-	biddingCarAdd
+	biddingCarAdd,
+	biddingCarDetails
 }
