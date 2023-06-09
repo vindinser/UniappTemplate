@@ -7,8 +7,8 @@
 			<u-avatar :src="login" mode="widthFix" size="56" />
 			<view class="info-inner">
 				<view class="info-inner_top">
-					<text class="info-inner_top-name">{{ $store.getters.userName || '未认证' }}</text>
-					<text v-if="this.$store.getters.auditStatus === 1" class="info-inner_top-status">
+					<text class="info-inner_top-name">{{ userName || '未认证' }}</text>
+					<text v-if="auditStatus === 1" class="info-inner_top-status">
 						<text class="iconfont icon-renzheng" />
 						<text>定损员已认证</text>
 					</text>
@@ -59,9 +59,13 @@
 			],
 			baseInfoPath: {
 				path: '/pages/set/personal-info/personal-info'
-			}
+			},
+			userName: '',
+			auditStatus: ''
 		}),
 		onShow() {
+			this.$store.getters.userName !== '' && (this.userName = this.$store.getters.userName)
+			this.auditStatus = this.$store.getters.auditStatus
 			this.$store.getters.auditStatus !== 1 && this.$store.dispatch('GetUserInfo')
 		},
 		methods: {

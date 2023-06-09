@@ -6,7 +6,7 @@
 		<!-- 内容 -->
 		<view class="index-box">
 			<!-- 通知 -->
-			<view class="u-m-b-32" v-if="this.$store.getters.auditStatus !== 1">
+			<view class="u-m-b-32" v-if="auditStatus !== 1">
 				<u-notice-bar text="请先进行认证,审核通过后可进行功能操作" />
 			</view>
 			<!-- 公示 -->
@@ -42,7 +42,8 @@
 				{ icon: 'icon-changjianwenti', name: '常见问题', color: '#5AC725', path: '' },
 				{ icon: 'icon-kefurexian', name: '客服热线', color: '#1570EF', path: '' }
 			],
-			stepList: ['填写车辆相关信息', '华正线上下线同步车辆接收状态']
+			stepList: ['填写车辆相关信息', '华正线上下线同步车辆接收状态'],
+			auditStatus: ''
 		}),
 		onLoad() {
 			// #ifdef MP-WEIXIN
@@ -51,6 +52,7 @@
 		},
 		onShow() {
 			this.$tools.certificationPrompt()
+			this.auditStatus = this.$store.getters.auditStatus
 		},
 		methods: {
 			// icon点击事件
